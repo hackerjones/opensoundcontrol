@@ -18,7 +18,10 @@ namespace OpenSoundControl
     public class OscBundle : IOscBundleElement
     {
         private List<IOscBundleElement> elements = new List<IOscBundleElement>();
-    
+
+        /// <summary>
+        /// Creates an empty OSC bundle.
+        /// </summary>
         public OscBundle()
         {
             

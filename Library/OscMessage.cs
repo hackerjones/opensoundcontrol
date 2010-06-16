@@ -19,7 +19,10 @@ namespace OpenSoundControl
     {
         private List<IOscDataType> arguments;
         private OscAddress address;
-               
+
+        /// <summary>
+        /// Creates an empty OSC message.
+        /// </summary>
         public OscMessage()
         {
             address = new OscAddress();

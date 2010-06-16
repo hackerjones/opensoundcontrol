@@ -20,12 +20,18 @@ namespace OpenSoundControl
         private OscBundle bundle;
         private OscMessage message;
 
+        /// <summary>
+        /// Creates a packet IO event argument object which contains an OSC bundle.
+        /// </summary>
         public OscPacketIOEventArgs(OscBundle bundle, OscPacketIODeviceAddress deviceAddress)
         {            
             this.deviceAddress = deviceAddress;
             this.bundle = bundle;
         }
 
+        /// <summary>
+        /// Creates a packet IO event argument object which contains an OSC message.
+        /// </summary>
         public OscPacketIOEventArgs(OscMessage message, OscPacketIODeviceAddress deviceAddress)
         {
             this.deviceAddress = deviceAddress;

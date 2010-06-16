@@ -18,17 +18,26 @@ namespace OpenSoundControl
     public class OscBlob : IOscDataType
     {
         private List<byte> buffer = new List<byte>();
-    
+
+        /// <summary>
+        /// Creates an empty OSC blob.
+        /// </summary>
         public OscBlob()
         {
             
         }
 
+        /// <summary>
+        /// Creates an OSC blob from a byte array.
+        /// </summary>
         public OscBlob(byte[] buffer)
         {        
             Buffer.AddRange(buffer);
         }
 
+        /// <summary>
+        /// Creates an OSC blob from a byte array segment.
+        /// </summary>
         public OscBlob(ArraySegment<byte> bufferSeg)
         {            
             for (int i = bufferSeg.Offset; i < (bufferSeg.Offset + bufferSeg.Count); i++)

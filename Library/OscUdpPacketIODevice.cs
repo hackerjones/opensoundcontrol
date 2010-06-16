@@ -26,6 +26,7 @@ namespace OpenSoundControl
         public OscUdpPacketIODevice(int localPort)
         {
             udp = new UdpClient(localPort);
+            udp.EnableBroadcast = true;
             BeginReceive();
         }
 

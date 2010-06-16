@@ -17,11 +17,17 @@ namespace OpenSoundControl
     /// </summary>
     public class OscUInt32 : IOscDataType
     {
+        /// <summary>
+        /// Creates a OSC unsigned 32-bit integer with the value of zero.
+        /// </summary>
         public OscUInt32()
         {
 
         }
 
+        /// <summary>
+        /// Creates an OSC unsigned 32-bit integer with the given value.
+        /// </summary>
         public OscUInt32(uint value)
         {
             Value = value;
