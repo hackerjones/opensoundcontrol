@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{A310CFF5-CE0B-4B9A-81A6-AA7E7419B110}"
+	ProjectSection(SolutionItems) = preProject
+		license.docx = license.docx
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{1C78CC26-1E0B-437E-9CB6-B7A9C1EB8761}"
 EndProject
