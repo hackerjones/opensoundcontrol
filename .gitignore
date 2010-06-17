@@ -1,7 +1,11 @@
-bin/
-Bin/
-obj/
-Obj/
+
+[Bb]in/
+[Oo]bj/
+Library/Documents/
 *.user
 *.suo
 *.sln.cache
+*.obj
+*.exe
+Thumbs.db
+_ReSharper*/
