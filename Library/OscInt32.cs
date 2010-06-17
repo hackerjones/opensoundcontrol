@@ -46,6 +46,9 @@ namespace OpenSoundControl
 
         #endregion
 
+        /// <summary>
+        /// Converts the OSC signed 32-bit integer to a string.
+        /// </summary>
         public override string ToString()
         {
             return Convert.ToString(Value);

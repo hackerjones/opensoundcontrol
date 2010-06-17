@@ -33,7 +33,6 @@ namespace OpenSoundControl
         public OscTimetag Timetag
         {
             get { throw new NotImplementedException(); }
-            set { }
         }
 
         #region IOscBundleElement Members

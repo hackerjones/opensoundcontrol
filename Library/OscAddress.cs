@@ -14,6 +14,9 @@ namespace OpenSoundControl
     /// </summary>
     public class OscAddress
     {
+        /// <summary>
+        /// Creates an empty OSC address.
+        /// </summary>
         public OscAddress()
         {
             throw new NotImplementedException();
@@ -21,6 +24,9 @@ namespace OpenSoundControl
 
         public OscString Value { get; set; }
 
+        /// <summary>
+        /// Converts the OSC address to a string.
+        /// </summary>
         public override string ToString()
         {
             return Value.ToString();

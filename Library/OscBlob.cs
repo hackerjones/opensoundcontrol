@@ -72,6 +72,9 @@ namespace OpenSoundControl
 
         #endregion
 
+        /// <summary>
+        /// Converts the OSC blob data to a string.
+        /// </summary>
         public override string ToString()
         {
             return Encoding.UTF8.GetString(buffer.ToArray());
