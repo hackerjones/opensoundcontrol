@@ -7,8 +7,6 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OpenSoundControl
 {
@@ -17,8 +15,8 @@ namespace OpenSoundControl
     /// </summary>
     public class OscMessage : IOscBundleElement
     {
-        private List<IOscDataType> arguments;
         private OscAddress address;
+        private List<IOscDataType> arguments;
 
         /// <summary>
         /// Creates an empty OSC message.
@@ -31,10 +29,7 @@ namespace OpenSoundControl
 
         public List<IOscDataType> Arguments
         {
-            get
-            {
-                return arguments;
-            }
+            get { return arguments; }
             set
             {
                 // don't allow arguments to be set to null
@@ -45,32 +40,25 @@ namespace OpenSoundControl
             }
         }
 
-        public OscAddress Address
-        {
-            get;
-            set;            
-        }
+        public OscAddress Address { get; set; }
 
         public OscTypeTagString TypeTagString
         {
-            get
-            {
-                return new OscTypeTagString();
-            }
-            
+            get { return new OscTypeTagString(); }
         }
 
-        public override string ToString()
-        {
-            throw new System.NotImplementedException();
-        }
+        #region IOscBundleElement Members
 
         public OscBundleElementType BundleElementType
         {
-            get
-            {
-                return OscBundleElementType.Message;
-            }
+            get { return OscBundleElementType.Message; }
+        }
+
+        #endregion
+
+        public override string ToString()
+        {
+            throw new NotImplementedException();
         }
     }
 }

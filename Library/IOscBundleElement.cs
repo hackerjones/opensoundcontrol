@@ -5,11 +5,6 @@
  * binary distributions or online at
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace OpenSoundControl
 {
     public enum OscBundleElementType
@@ -18,15 +13,14 @@ namespace OpenSoundControl
         Bundle
     }
 
+    /// <summary>
+    /// Interface for OSC bundle elements
+    /// </summary>
     public interface IOscBundleElement
     {
-
         /// <summary>
         /// Indicates the type of bundle element.
         /// </summary>
-        OscBundleElementType BundleElementType
-        {
-            get;            
-        }
+        OscBundleElementType BundleElementType { get; }
     }
 }

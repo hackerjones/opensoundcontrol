@@ -6,9 +6,6 @@
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OpenSoundControl
 {
@@ -19,15 +16,22 @@ namespace OpenSoundControl
     {
         public OscTimetag()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
+
+        #region IOscDataType Members
 
         public OscDataType DataType
         {
-            get
-            {
-                return OscDataType.Timetag;
-            }
+            get { return OscDataType.Timetag; }
         }
+
+
+        public bool HasArgumentData
+        {
+            get { return true; }
+        }
+
+        #endregion
     }
 }

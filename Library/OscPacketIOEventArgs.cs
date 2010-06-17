@@ -6,25 +6,25 @@
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OpenSoundControl
 {
     public class OscPacketIOEventArgs : EventArgs
     {
-        private OscPacketIODeviceAddress deviceAddress;
         /// <summary>
         /// </summary>
-        private OscBundle bundle;
-        private OscMessage message;
+        private readonly OscBundle bundle;
+
+        private readonly OscPacketIODeviceAddress deviceAddress;
+
+        private readonly OscMessage message;
 
         /// <summary>
         /// Creates a packet IO event argument object which contains an OSC bundle.
         /// </summary>
-        public OscPacketIOEventArgs(OscBundle bundle, OscPacketIODeviceAddress deviceAddress)
-        {            
+        public OscPacketIOEventArgs(OscBundle bundle,
+                                    OscPacketIODeviceAddress deviceAddress)
+        {
             this.deviceAddress = deviceAddress;
             this.bundle = bundle;
         }
@@ -32,7 +32,8 @@ namespace OpenSoundControl
         /// <summary>
         /// Creates a packet IO event argument object which contains an OSC message.
         /// </summary>
-        public OscPacketIOEventArgs(OscMessage message, OscPacketIODeviceAddress deviceAddress)
+        public OscPacketIOEventArgs(OscMessage message,
+                                    OscPacketIODeviceAddress deviceAddress)
         {
             this.deviceAddress = deviceAddress;
             this.message = message;
@@ -40,10 +41,7 @@ namespace OpenSoundControl
 
         public OscPacketIODeviceAddress DeviceAddress
         {
-            get
-            {
-                return deviceAddress;
-            }
+            get { return deviceAddress; }
         }
 
         /// <summary>
@@ -51,10 +49,7 @@ namespace OpenSoundControl
         /// </summary>
         public bool IsBundle
         {
-            get
-            {
-                return bundle != null;
-            }            
+            get { return bundle != null; }
         }
 
         /// <summary>
@@ -62,10 +57,7 @@ namespace OpenSoundControl
         /// </summary>
         public bool IsMessage
         {
-            get
-            {
-                return message != null;
-            }            
+            get { return message != null; }
         }
     }
 }

@@ -7,8 +7,6 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OpenSoundControl
 {
@@ -18,7 +16,7 @@ namespace OpenSoundControl
     public class OscTypeTagString
     {
         private List<IOscDataType> arguments;
-    
+
         public OscTypeTagString()
         {
             arguments = new List<IOscDataType>();
@@ -31,7 +29,7 @@ namespace OpenSoundControl
 
         public override string ToString()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public char DataTypeToTypeTag(OscDataType type)

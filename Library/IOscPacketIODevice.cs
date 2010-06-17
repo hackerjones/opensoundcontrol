@@ -6,12 +6,12 @@
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OpenSoundControl
 {
+    /// <summary>
+    /// Interface for OSC packet IO devices
+    /// </summary>
     public interface IOscPacketIODevice
     {
         /// <summary>

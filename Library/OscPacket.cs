@@ -7,15 +7,16 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace OpenSoundControl
 {
+    /// <summary>
+    /// Methods for creating and parsing OSC packets
+    /// </summary>
     public static class OscPacket
     {
-
         /// <summary>
         /// Tries to parse the given array for a valid OSC bundle.
         /// </summary>
@@ -24,7 +25,7 @@ namespace OpenSoundControl
             out OscBundle bundle
             )
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -35,7 +36,7 @@ namespace OpenSoundControl
             out OscMessage message
             )
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -48,20 +49,27 @@ namespace OpenSoundControl
             int n = size % 4;
             if (n == 0)
                 return size;
-            else
-                return (size + (4 - n));
+
+            return (size + (4 - n));
         }
 
         /// <summary>
         /// Pads the given input array so that it is 32-bit aligned.
         /// </summary>
-        public static void PadArray(
-            ref byte[] buffer
+        /// <remarks>If the array needs to be resized for alignment this function does not alter the input array.
+        /// It instead creates a new aligned array and copies the input array to the new array.</remarks>
+        /// <returns>32-bit aligned copy of the input array</returns>
+        public static byte[] PadArray(
+            byte[] buffer
             )
         {
             int rawSize = buffer.Length;
             int padSize = PadSize(rawSize);
-            Array.Resize<byte>(ref buffer, padSize);
+            if (padSize == rawSize)
+                return buffer;
+            var newBuffer = new byte[padSize];
+            buffer.CopyTo(newBuffer, 0);
+            return newBuffer;
         }
 
         /// <summary>
@@ -71,7 +79,7 @@ namespace OpenSoundControl
             OscBundle bundle
             )
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -81,7 +89,7 @@ namespace OpenSoundControl
             OscMessage message
             )
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -92,7 +100,9 @@ namespace OpenSoundControl
             OscString str
             )
         {
-            throw new System.NotImplementedException();
+            byte[] buffer = Encoding.ASCII.GetBytes(str.Value);
+            buffer = PadArray(buffer);
+            return buffer;
         }
 
         /// <summary>
@@ -102,7 +112,7 @@ namespace OpenSoundControl
             OscFloat32 f
             )
         {
-            throw new System.NotImplementedException();
+            return GetBytes(IPAddress.HostToNetworkOrder((int)f.Value));
         }
 
         /// <summary>
@@ -112,7 +122,7 @@ namespace OpenSoundControl
             OscInt32 n
             )
         {
-            throw new System.NotImplementedException();
+            return GetBytes(IPAddress.HostToNetworkOrder(n.Value));
         }
 
         /// <summary>
@@ -122,7 +132,7 @@ namespace OpenSoundControl
             OscUInt32 n
             )
         {
-            throw new System.NotImplementedException();
+            return GetBytes(IPAddress.HostToNetworkOrder((int)n.Value));
         }
 
         /// <summary>
@@ -132,8 +142,32 @@ namespace OpenSoundControl
             OscBlob blob
             )
         {
-            throw new System.NotImplementedException();
+            var buffer = new List<byte>();
+
+            // 4 bytes of size
+            buffer.AddRange(GetBytes(blob.Buffer.Count));
+
+            // size bytes of data
+            buffer.AddRange(PadArray(blob.Buffer.ToArray()));
+
+            return buffer.ToArray();
         }
 
+        /// <summary>
+        /// Converts a 32-bit value into a byte array.
+        /// </summary>
+        private static byte[] GetBytes(int value)
+        {
+            var buffer = new byte[4];
+            unsafe
+            {
+                var ptr = (byte*)&value;
+                for (int i = 0; i < 4; i++)
+                {
+                    buffer[i] = ptr[i];
+                }
+            }
+            return buffer;
+        }
     }
 }

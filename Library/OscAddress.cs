@@ -6,9 +6,6 @@
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OpenSoundControl
 {
@@ -17,17 +14,12 @@ namespace OpenSoundControl
     /// </summary>
     public class OscAddress
     {
-    
         public OscAddress()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public OscString Value
-        {
-            get;
-            set;            
-        }
+        public OscString Value { get; set; }
 
         public override string ToString()
         {

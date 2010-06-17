@@ -7,8 +7,6 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OpenSoundControl
 {
@@ -19,28 +17,9 @@ namespace OpenSoundControl
     {
         private List<IOscBundleElement> elements = new List<IOscBundleElement>();
 
-        /// <summary>
-        /// Creates an empty OSC bundle.
-        /// </summary>
-        public OscBundle()
-        {
-            
-        }
-
-        public OscBundleElementType BundleElementType
-        {
-            get
-            {
-                return OscBundleElementType.Bundle;
-            }
-        }
-
         public List<IOscBundleElement> Elements
         {
-            get
-            {
-                return elements;
-            }
+            get { return elements; }
             set
             {
                 // don't allow elements to be set to null
@@ -53,13 +32,17 @@ namespace OpenSoundControl
 
         public OscTimetag Timetag
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { throw new NotImplementedException(); }
+            set { }
         }
+
+        #region IOscBundleElement Members
+
+        public OscBundleElementType BundleElementType
+        {
+            get { return OscBundleElementType.Bundle; }
+        }
+
+        #endregion
     }
 }

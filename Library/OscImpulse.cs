@@ -5,26 +5,23 @@
  * binary distributions or online at
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace OpenSoundControl
 {
     public class OscImpulse : IOscDataType
     {
-        public OscImpulse()
+        #region IOscDataType Members
+
+        public OscDataType DataType
         {
-            
+            get { return OscDataType.Impulse; }
         }
-    
-        public OscDataType DataType 
-        { 
-            get 
-            { 
-                return OscDataType.Impulse;
-            } 
+
+
+        public bool HasArgumentData
+        {
+            get { return false; }
         }
+
+        #endregion
     }
 }

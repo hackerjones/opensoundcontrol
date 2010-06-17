@@ -7,7 +7,6 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace OpenSoundControl
@@ -24,14 +23,13 @@ namespace OpenSoundControl
         /// </summary>
         public OscBlob()
         {
-            
         }
 
         /// <summary>
-        /// Creates an OSC blob from a byte array.
+        /// Creates an OSC blob from an IEnumerable<byte>.
         /// </summary>
-        public OscBlob(byte[] buffer)
-        {        
+        public OscBlob(IEnumerable<byte> buffer)
+        {
             Buffer.AddRange(buffer);
         }
 
@@ -39,27 +37,16 @@ namespace OpenSoundControl
         /// Creates an OSC blob from a byte array segment.
         /// </summary>
         public OscBlob(ArraySegment<byte> bufferSeg)
-        {            
+        {
             for (int i = bufferSeg.Offset; i < (bufferSeg.Offset + bufferSeg.Count); i++)
             {
                 Buffer.Add(bufferSeg.Array[i]);
             }
         }
 
-        public OscDataType DataType 
-        { 
-            get 
-            { 
-                return OscDataType.Blob; 
-            } 
-        }
-
         public List<byte> Buffer
         {
-            get
-            {
-                return buffer;
-            }
+            get { return buffer; }
             set
             {
                 // don't allow the list to be set to null
@@ -70,9 +57,24 @@ namespace OpenSoundControl
             }
         }
 
+        #region IOscDataType Members
+
+        public OscDataType DataType
+        {
+            get { return OscDataType.Blob; }
+        }
+
+
+        public bool HasArgumentData
+        {
+            get { return true; }
+        }
+
+        #endregion
+
         public override string ToString()
         {
             return Encoding.UTF8.GetString(buffer.ToArray());
-        }        
+        }
     }
 }

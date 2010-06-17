@@ -6,9 +6,6 @@
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Net;
 using System.Net.Sockets;
 
@@ -16,7 +13,7 @@ namespace OpenSoundControl
 {
     public class OscUdpPacketIODevice : IDisposable, IOscPacketIODevice
     {
-        private UdpClient udp;
+        private readonly UdpClient udp;
         private bool disposed;
 
         /// <summary>
@@ -36,10 +33,17 @@ namespace OpenSoundControl
             BeginReceive();
         }
 
-        ~OscUdpPacketIODevice()
+        #region IDisposable Members
+
+        public void Dispose()
         {
-            Dispose(false);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        #endregion
+
+        #region IOscPacketIoDevice Members
 
         /// <summary>
         /// Raised when a send operation completes.
@@ -73,14 +77,21 @@ namespace OpenSoundControl
             throw new NotImplementedException();
         }
 
+        #endregion
+
+        ~OscUdpPacketIODevice()
+        {
+            Dispose(false);
+        }
+
         private void OnSend(IAsyncResult ar)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void BeginReceive()
         {
-            udp.BeginReceive(new AsyncCallback(OnReceive), null);
+            udp.BeginReceive(OnReceive, null);
         }
 
         private void OnReceive(IAsyncResult ar)
@@ -88,11 +99,11 @@ namespace OpenSoundControl
             try
             {
                 // get the datagram
-                IPEndPoint remoteEP = new IPEndPoint(IPAddress.Any, 0);
+                var remoteEP = new IPEndPoint(IPAddress.Any, 0);
                 byte[] buf = udp.EndReceive(ar, ref remoteEP);
 
                 // create an device address for the remote end point
-                OscPacketIODeviceAddress deviceAddress = new OscPacketIODeviceAddress(OscPacketIOAddressType.Udp, remoteEP);
+                var deviceAddress = new OscPacketIODeviceAddress(OscPacketIOAddressType.Udp, remoteEP);
 
                 OscBundle bundle;
                 OscMessage message;
@@ -103,7 +114,7 @@ namespace OpenSoundControl
                 {
                     eventArgs = new OscPacketIOEventArgs(bundle, deviceAddress);
                 }
-                //try parsing a message                    
+                    //try parsing a message                    
                 else if (OscPacket.TryParseMessage(buf, out message))
                 {
                     eventArgs = new OscPacketIOEventArgs(message, deviceAddress);
@@ -117,12 +128,6 @@ namespace OpenSoundControl
             {
                 BeginReceive();
             }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         private void Dispose(bool disposing)

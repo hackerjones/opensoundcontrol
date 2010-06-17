@@ -6,9 +6,6 @@
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace OpenSoundControl
 {
@@ -22,7 +19,6 @@ namespace OpenSoundControl
         /// </summary>
         public OscInt32()
         {
-            
         }
 
         /// <summary>
@@ -32,20 +28,23 @@ namespace OpenSoundControl
         {
             Value = value;
         }
-    
-        public OscDataType DataType 
-        { 
-            get 
-            { 
-                return OscDataType.Int32;
-            }
+
+        public int Value { get; set; }
+
+        #region IOscDataType Members
+
+        public OscDataType DataType
+        {
+            get { return OscDataType.Int32; }
         }
 
-        public int Value
+
+        public bool HasArgumentData
         {
-            get;
-            set;
+            get { return true; }
         }
+
+        #endregion
 
         public override string ToString()
         {

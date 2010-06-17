@@ -6,9 +6,6 @@
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Net;
 
 namespace OpenSoundControl
@@ -20,17 +17,18 @@ namespace OpenSoundControl
 
     public class OscPacketIODeviceAddress
     {
-        private OscPacketIOAddressType type;
         private IPEndPoint ipEndPoint;
-            
-        public OscPacketIODeviceAddress(OscPacketIOAddressType type, IPEndPoint localEP)
+        private OscPacketIOAddressType type;
+
+        public OscPacketIODeviceAddress(OscPacketIOAddressType type,
+                                        IPEndPoint localEP)
         {
             if (type != OscPacketIOAddressType.Udp)
             {
                 throw new ArgumentException("Invalid address type for IPEndPoint");
             }
             this.type = type;
-            this.ipEndPoint = localEP;
+            ipEndPoint = localEP;
         }
-    }    
+    }
 }
