@@ -29,16 +29,24 @@ namespace OpenSoundControl
             Value = value;
         }
 
+        /// <summary>
+        /// Gets the unsigned integer value.
+        /// </summary>
         public uint Value { get; set; }
 
         #region IOscDataType Members
 
+        /// <summary>
+        /// Gets the OSC data type.
+        /// </summary>        
         public OscDataType DataType
         {
             get { return OscDataType.UInt32; }
         }
 
-
+        /// <summary>
+        /// Gets if the type has associated argument data.
+        /// </summary>
         public bool HasArgumentData
         {
             get { return true; }
@@ -46,6 +54,13 @@ namespace OpenSoundControl
 
         #endregion
 
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
             return Convert.ToString(Value);

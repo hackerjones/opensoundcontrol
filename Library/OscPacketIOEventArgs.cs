@@ -9,15 +9,16 @@ using System;
 
 namespace OpenSoundControl
 {
+    /// <summary>
+    /// Encapsulates packet IO event arguments
+    /// </summary>
     public class OscPacketIOEventArgs : EventArgs
     {
-        /// <summary>
-        /// </summary>
-        private readonly OscBundle bundle;
+        private readonly OscBundle _bundle;
 
-        private readonly OscPacketIODeviceAddress deviceAddress;
+        private readonly OscPacketIODeviceAddress _deviceAddress;
 
-        private readonly OscMessage message;
+        private readonly OscMessage _message;
 
         /// <summary>
         /// Creates a packet IO event argument object which contains an OSC bundle.
@@ -25,8 +26,8 @@ namespace OpenSoundControl
         public OscPacketIOEventArgs(OscBundle bundle,
                                     OscPacketIODeviceAddress deviceAddress)
         {
-            this.deviceAddress = deviceAddress;
-            this.bundle = bundle;
+            _deviceAddress = deviceAddress;
+            _bundle = bundle;
         }
 
         /// <summary>
@@ -35,29 +36,32 @@ namespace OpenSoundControl
         public OscPacketIOEventArgs(OscMessage message,
                                     OscPacketIODeviceAddress deviceAddress)
         {
-            this.deviceAddress = deviceAddress;
-            this.message = message;
-        }
-
-        public OscPacketIODeviceAddress DeviceAddress
-        {
-            get { return deviceAddress; }
+            _deviceAddress = deviceAddress;
+            _message = message;
         }
 
         /// <summary>
-        /// True if a bundle is contained in the event
+        /// Gets the device address.
+        /// </summary>        
+        public OscPacketIODeviceAddress DeviceAddress
+        {
+            get { return _deviceAddress; }
+        }
+
+        /// <summary>
+        /// Gets if the event contains a bundle
         /// </summary>
         public bool IsBundle
         {
-            get { return bundle != null; }
+            get { return _bundle != null; }
         }
 
         /// <summary>
-        /// True if a message is contained in the event
+        /// Gets if the event contains a message
         /// </summary>
         public bool IsMessage
         {
-            get { return message != null; }
+            get { return _message != null; }
         }
     }
 }

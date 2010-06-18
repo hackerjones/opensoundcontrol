@@ -10,14 +10,20 @@ using System.Net;
 
 namespace OpenSoundControl
 {
+    /// <summary>
+    /// Packet IO address type enumeration.
+    /// </summary>
     public enum OscPacketIOAddressType
     {
         Udp
     }
 
+    /// <summary>
+    /// Encapsulates a packet IO device address.
+    /// </summary>
     public class OscPacketIODeviceAddress
     {
-        private IPEndPoint ipEndPoint;
+        private readonly IPEndPoint _ipEndPoint;
         private OscPacketIOAddressType type;
 
         public OscPacketIODeviceAddress(OscPacketIOAddressType type,
@@ -28,7 +34,23 @@ namespace OpenSoundControl
                 throw new ArgumentException("Invalid address type for IPEndPoint");
             }
             this.type = type;
-            ipEndPoint = localEP;
+            _ipEndPoint = localEP;
+        }
+
+        /// <summary>
+        /// Gets the device address type.
+        /// </summary>
+        public OscPacketIOAddressType Type
+        {
+            get { return type; }
+        }
+
+        /// <summary>
+        /// Gets the device address as an IPEndPoint.
+        /// </summary>
+        public IPEndPoint IPEndPoint
+        {
+            get { return _ipEndPoint; }
         }
     }
 }

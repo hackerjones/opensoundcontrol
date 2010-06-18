@@ -15,33 +15,41 @@ namespace OpenSoundControl
     /// </summary>
     public class OscMessage : IOscBundleElement
     {
-        private OscAddress address;
-        private List<IOscDataType> arguments;
+        private List<IOscDataType> _arguments;
 
         /// <summary>
         /// Creates an empty OSC message.
         /// </summary>
         public OscMessage()
         {
-            address = new OscAddress();
-            arguments = new List<IOscDataType>();
+            Address = new OscAddress();
+            _arguments = new List<IOscDataType>();
         }
 
+        /// <summary>
+        /// Gets or sets the message argument list
+        /// </summary>
         public List<IOscDataType> Arguments
         {
-            get { return arguments; }
+            get { return _arguments; }
             set
             {
                 // don't allow arguments to be set to null
                 if (value == null)
-                    arguments.Clear();
+                    _arguments.Clear();
                 else
-                    arguments = value;
+                    _arguments = value;
             }
         }
 
+        /// <summary>
+        /// Gets or sets the message address.
+        /// </summary>
         public OscAddress Address { get; set; }
 
+        /// <summary>
+        /// Gets the message type tag string
+        /// </summary>
         public OscTypeTagString TypeTagString
         {
             get { return new OscTypeTagString(); }
@@ -49,6 +57,9 @@ namespace OpenSoundControl
 
         #region IOscBundleElement Members
 
+        /// <summary>
+        /// Gets the type of bundle element.
+        /// </summary>
         public OscBundleElementType BundleElementType
         {
             get { return OscBundleElementType.Message; }
@@ -56,6 +67,13 @@ namespace OpenSoundControl
 
         #endregion
 
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
             throw new NotImplementedException();

@@ -14,25 +14,39 @@ namespace OpenSoundControl
     /// </summary>
     public class OscFloat32 : IOscDataType
     {
+        /// <summary>
+        /// Creates a default OSC float. 
+        /// </summary>
         public OscFloat32()
         {
         }
 
+        /// <summary>
+        /// Creates an OSC float from the given value.
+        /// </summary>        
         public OscFloat32(float value)
         {
             Value = value;
         }
 
+        /// <summary>
+        /// Gets the float value.
+        /// </summary>
         public float Value { get; set; }
 
         #region IOscDataType Members
 
+        /// <summary>
+        /// Gets the OSC data type.
+        /// </summary>        
         public OscDataType DataType
         {
             get { return OscDataType.Float32; }
         }
 
-
+        /// <summary>
+        /// Gets if the type has associated argument data.
+        /// </summary>
         public bool HasArgumentData
         {
             get { return true; }
@@ -40,6 +54,13 @@ namespace OpenSoundControl
 
         #endregion
 
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
             return Convert.ToString(Value);

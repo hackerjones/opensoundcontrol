@@ -16,7 +16,7 @@ namespace OpenSoundControl
     /// </summary>
     public class OscBlob : IOscDataType
     {
-        private List<byte> buffer = new List<byte>();
+        private List<byte> _buffer = new List<byte>();
 
         /// <summary>
         /// Creates an empty OSC blob.
@@ -26,7 +26,7 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Creates an OSC blob from an IEnumerable<byte>.
+        /// Creates an OSC blob from buffer.
         /// </summary>
         public OscBlob(IEnumerable<byte> buffer)
         {
@@ -44,27 +44,44 @@ namespace OpenSoundControl
             }
         }
 
+        /// <summary>
+        /// Gets or sets the byte list that contains the blob data.
+        /// </summary>
         public List<byte> Buffer
         {
-            get { return buffer; }
+            get { return _buffer; }
             set
             {
                 // don't allow the list to be set to null
                 if (value == null)
-                    buffer.Clear();
+                    _buffer.Clear();
                 else
-                    buffer = value;
+                    _buffer = value;
             }
+        }
+
+
+        /// <summary>
+        /// Gets the empty state of the blob.
+        /// </summary>
+        public bool IsEmpty
+        {
+            get { return (_buffer.Count < 1); }
         }
 
         #region IOscDataType Members
 
+        /// <summary>
+        /// Gets the OSC data type.
+        /// </summary>        
         public OscDataType DataType
         {
             get { return OscDataType.Blob; }
         }
 
-
+        /// <summary>
+        /// Gets if the type has associated argument data.
+        /// </summary>
         public bool HasArgumentData
         {
             get { return true; }
@@ -77,7 +94,7 @@ namespace OpenSoundControl
         /// </summary>
         public override string ToString()
         {
-            return Encoding.UTF8.GetString(buffer.ToArray());
+            return Encoding.UTF8.GetString(_buffer.ToArray());
         }
     }
 }

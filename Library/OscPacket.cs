@@ -20,10 +20,8 @@ namespace OpenSoundControl
         /// <summary>
         /// Tries to parse the given array for a valid OSC bundle.
         /// </summary>
-        public static bool TryParseBundle(
-            byte[] packet,
-            out OscBundle bundle
-            )
+        public static bool TryParseBundle(byte[] packet,
+                                          out OscBundle bundle)
         {
             throw new NotImplementedException();
         }
@@ -31,10 +29,8 @@ namespace OpenSoundControl
         /// <summary>
         /// Tries to parse the given array for a valid OSC message.
         /// </summary>
-        public static bool TryParseMessage(
-            byte[] packet,
-            out OscMessage message
-            )
+        public static bool TryParseMessage(byte[] packet,
+                                           out OscMessage message)
         {
             throw new NotImplementedException();
         }
@@ -42,9 +38,7 @@ namespace OpenSoundControl
         /// <summary>
         /// Calculates a 32-bit aligned size for the given input size.
         /// </summary>
-        public static int PadSize(
-            int size
-            )
+        public static int PadSize(int size)
         {
             int n = size % 4;
             if (n == 0)
@@ -59,9 +53,7 @@ namespace OpenSoundControl
         /// <remarks>If the array needs to be resized for alignment this function does not alter the input array.
         /// It instead creates a new aligned array and copies the input array to the new array.</remarks>
         /// <returns>32-bit aligned copy of the input array</returns>
-        public static byte[] PadArray(
-            byte[] buffer
-            )
+        public static byte[] PadArray(byte[] buffer)
         {
             int rawSize = buffer.Length;
             int padSize = PadSize(rawSize);
@@ -75,9 +67,7 @@ namespace OpenSoundControl
         /// <summary>
         /// Converts an OSC bundle into a packet byte array.
         /// </summary>
-        public static byte[] GetBytes(
-            OscBundle bundle
-            )
+        public static byte[] GetBytes(OscBundle bundle)
         {
             throw new NotImplementedException();
         }
@@ -85,9 +75,7 @@ namespace OpenSoundControl
         /// <summary>
         /// Converts an OSC message into a packet byte array.
         /// </summary>
-        public static byte[] GetBytes(
-            OscMessage message
-            )
+        public static byte[] GetBytes(OscMessage message)
         {
             throw new NotImplementedException();
         }
@@ -96,9 +84,7 @@ namespace OpenSoundControl
         /// Converts an OSC string type into a packet byte array.
         /// </summary>
         /// <returns>Packet IO device ready byte array</returns>
-        public static byte[] GetBytes(
-            OscString str
-            )
+        public static byte[] GetBytes(OscString str)
         {
             byte[] buffer = Encoding.ASCII.GetBytes(str.Value);
             buffer = PadArray(buffer);
@@ -108,9 +94,7 @@ namespace OpenSoundControl
         /// <summary>
         /// Converts a 32-bit OSC float into a packet byte array.
         /// </summary>
-        public static byte[] GetBytes(
-            OscFloat32 f
-            )
+        public static byte[] GetBytes(OscFloat32 f)
         {
             return GetBytes(IPAddress.HostToNetworkOrder((int)f.Value));
         }
@@ -118,9 +102,7 @@ namespace OpenSoundControl
         /// <summary>
         /// Converts a 32-bit OSC signed integer into a packet byte array.
         /// </summary>
-        public static byte[] GetBytes(
-            OscInt32 n
-            )
+        public static byte[] GetBytes(OscInt32 n)
         {
             return GetBytes(IPAddress.HostToNetworkOrder(n.Value));
         }
@@ -128,9 +110,7 @@ namespace OpenSoundControl
         /// <summary>
         /// Converts a 32-bit OSC unsigned integer into a packet byte array.
         /// </summary>
-        public static byte[] GetBytes(
-            OscUInt32 n
-            )
+        public static byte[] GetBytes(OscUInt32 n)
         {
             return GetBytes(IPAddress.HostToNetworkOrder((int)n.Value));
         }
@@ -138,9 +118,7 @@ namespace OpenSoundControl
         /// <summary>
         /// Converts an OSC blob type into a packet byte array.
         /// </summary>
-        public static byte[] GetBytes(
-            OscBlob blob
-            )
+        public static byte[] GetBytes(OscBlob blob)
         {
             var buffer = new List<byte>();
 

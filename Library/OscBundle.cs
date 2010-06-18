@@ -5,7 +5,6 @@
  * binary distributions or online at
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
-using System;
 using System.Collections.Generic;
 
 namespace OpenSoundControl
@@ -15,28 +14,34 @@ namespace OpenSoundControl
     /// </summary>
     public class OscBundle : IOscBundleElement
     {
-        private List<IOscBundleElement> elements = new List<IOscBundleElement>();
+        private List<IOscBundleElement> _elements = new List<IOscBundleElement>();
 
+        /// <summary>
+        /// Gets or sets the list containing the bundle elements
+        /// </summary>
         public List<IOscBundleElement> Elements
         {
-            get { return elements; }
+            get { return _elements; }
             set
             {
                 // don't allow elements to be set to null
                 if (value == null)
-                    elements.Clear();
+                    _elements.Clear();
                 else
-                    elements = value;
+                    _elements = value;
             }
         }
 
-        public OscTimetag Timetag
-        {
-            get { throw new NotImplementedException(); }
-        }
+        /// <summary>
+        /// Gets the bundle timetag. 
+        /// </summary>
+        public OscTimetag Timetag { get; set; }
 
         #region IOscBundleElement Members
 
+        /// <summary>
+        /// Gets the type of bundle element.
+        /// </summary>
         public OscBundleElementType BundleElementType
         {
             get { return OscBundleElementType.Bundle; }

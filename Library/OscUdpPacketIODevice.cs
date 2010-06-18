@@ -11,6 +11,9 @@ using System.Net.Sockets;
 
 namespace OpenSoundControl
 {
+    /// <summary>
+    /// Contains methods for sending and receiving OSC packets over UDP.
+    /// </summary>
     public class OscUdpPacketIODevice : IDisposable, IOscPacketIODevice
     {
         private readonly UdpClient udp;
@@ -22,8 +25,7 @@ namespace OpenSoundControl
         /// <param name="localPort">Creates a UDP packet IO device using the given local IPEndPoint.</param>
         public OscUdpPacketIODevice(int localPort)
         {
-            udp = new UdpClient(localPort);
-            udp.EnableBroadcast = true;
+            udp = new UdpClient(localPort) { EnableBroadcast = true };
             BeginReceive();
         }
 
@@ -35,6 +37,10 @@ namespace OpenSoundControl
 
         #region IDisposable Members
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
             Dispose(true);
@@ -43,7 +49,7 @@ namespace OpenSoundControl
 
         #endregion
 
-        #region IOscPacketIoDevice Members
+        #region IOscPacketIODevice Members
 
         /// <summary>
         /// Raised when a send operation completes.
@@ -79,6 +85,9 @@ namespace OpenSoundControl
 
         #endregion
 
+        /// <summary>
+        /// Allows an <see cref="T:System.Object"/> to attempt to free resources and perform other cleanup operations before the <see cref="T:System.Object"/> is reclaimed by garbage collection.
+        /// </summary>
         ~OscUdpPacketIODevice()
         {
             Dispose(false);

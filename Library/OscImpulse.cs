@@ -7,16 +7,24 @@
  */
 namespace OpenSoundControl
 {
+    /// <summary>
+    /// Encapsulates an OSC impulse data type
+    /// </summary>
     public class OscImpulse : IOscDataType
     {
         #region IOscDataType Members
 
+        /// <summary>
+        /// Gets the OSC data type.
+        /// </summary>        
         public OscDataType DataType
         {
             get { return OscDataType.Impulse; }
         }
 
-
+        /// <summary>
+        /// Gets if the type has associated argument data.
+        /// </summary>
         public bool HasArgumentData
         {
             get { return false; }

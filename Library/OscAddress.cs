@@ -5,8 +5,6 @@
  * binary distributions or online at
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
-using System;
-
 namespace OpenSoundControl
 {
     /// <summary>
@@ -14,15 +12,30 @@ namespace OpenSoundControl
     /// </summary>
     public class OscAddress
     {
+        private OscString _value;
+
         /// <summary>
-        /// Creates an empty OSC address.
+        /// Creates an empty OSC address
         /// </summary>
         public OscAddress()
         {
-            throw new NotImplementedException();
+            _value = new OscString();
         }
 
-        public OscString Value { get; set; }
+        /// <summary>
+        /// Gets or sets the address value from an OscString
+        /// </summary>
+        public OscString Value
+        {
+            get { return _value; }
+            set
+            {
+                if (value == null)
+                {
+                    _value = new OscString();
+                }
+            }
+        }
 
         /// <summary>
         /// Converts the OSC address to a string.

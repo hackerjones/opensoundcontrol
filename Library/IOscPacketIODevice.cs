@@ -29,19 +29,15 @@ namespace OpenSoundControl
         /// </summary>
         /// <param name="message">OSC message to send.</param>
         /// <param name="deviceAddress">Device address to send to.</param>
-        void Send(
-            OscMessage message,
-            OscPacketIODeviceAddress deviceAddress
-            );
+        void Send(OscMessage message,
+                  OscPacketIODeviceAddress deviceAddress);
 
         /// <summary>
         /// Sends a OSC bundle to the given device address.
         /// </summary>
         /// <param name="bundle">OSC bundle to send.</param>
         /// <param name="deviceAddress">Device address to send to.</param>
-        void Send(
-            OscBundle bundle,
-            OscPacketIODeviceAddress deviceAddress
-            );
+        void Send(OscBundle bundle,
+                  OscPacketIODeviceAddress deviceAddress);
     }
 }

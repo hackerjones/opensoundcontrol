@@ -7,9 +7,18 @@
  */
 namespace OpenSoundControl
 {
+    /// <summary>
+    /// Bundle element type enumeration.
+    /// </summary>
     public enum OscBundleElementType
     {
+        /// <summary>
+        /// Message element
+        /// </summary>
         Message,
+        /// <summary>
+        /// Bundle element
+        /// </summary>
         Bundle
     }
 
@@ -19,7 +28,7 @@ namespace OpenSoundControl
     public interface IOscBundleElement
     {
         /// <summary>
-        /// Indicates the type of bundle element.
+        /// Gets the type of bundle element.
         /// </summary>
         OscBundleElementType BundleElementType { get; }
     }

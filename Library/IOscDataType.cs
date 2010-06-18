@@ -7,6 +7,9 @@
  */
 namespace OpenSoundControl
 {
+    /// <summary>
+    /// OSC data type enumeration.
+    /// </summary>
     public enum OscDataType
     {
         /// <summary>
@@ -56,9 +59,14 @@ namespace OpenSoundControl
     /// </summary>
     public interface IOscDataType
     {
-        /// <value>Gets the OSC data type.</value>
+        /// <summary>
+        /// Gets the OSC data type.
+        /// </summary>        
         OscDataType DataType { get; }
 
+        /// <summary>
+        /// Gets if the type has associated argument data.
+        /// </summary>
         bool HasArgumentData { get; }
     }
 }

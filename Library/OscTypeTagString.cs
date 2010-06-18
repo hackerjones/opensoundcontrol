@@ -15,23 +15,57 @@ namespace OpenSoundControl
     /// </summary>
     public class OscTypeTagString
     {
-        private List<IOscDataType> arguments;
+        private List<IOscDataType> _arguments = new List<IOscDataType>();
 
+        /// <summary>
+        /// Creates an empty type tag string
+        /// </summary>
         public OscTypeTagString()
         {
-            arguments = new List<IOscDataType>();
         }
 
-        public OscTypeTagString(List<IOscDataType> arguments)
+        /// <summary>
+        /// Creates a type tag string from the enumerable.
+        /// </summary>        
+        public OscTypeTagString(IEnumerable<IOscDataType> args)
         {
-            this.arguments = arguments;
+            _arguments.AddRange((args));
         }
 
+        /// <summary>
+        /// Gets or sets the argument list
+        /// </summary>
+        public List<IOscDataType> Arguments
+        {
+            get { return _arguments; }
+            set
+            {
+                if (value != null)
+                {
+                    _arguments = value;
+                }
+                else
+                {
+                    _arguments.Clear();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets the type tag character for the given OSC data type.
+        /// </summary>
         public char DataTypeToTypeTag(OscDataType type)
         {
             switch (type)
