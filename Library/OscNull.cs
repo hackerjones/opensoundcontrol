@@ -5,29 +5,51 @@
  * binary distributions or online at
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
+using System;
+
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an OSC null data type
+    /// Encapsulates a null
     /// </summary>
-    public class OscNull : IOscDataType
+    public class OscNull : IOscElement
     {
-        #region IOscDataType Members
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        public override string ToString()
+        {
+            return "Null";
+        }
+
+        #region Implementation of IOscElement
 
         /// <summary>
-        /// Gets the OSC data type.
+        /// Gets the element type.
         /// </summary>        
-        public OscDataType DataType
+        public OscElementType ElementType
         {
-            get { return OscDataType.Null; }
+            get { return OscElementType.Null; }
         }
 
         /// <summary>
-        /// Gets if the type has associated argument data.
+        ///  True if the element is also an argument
         /// </summary>
-        public bool HasArgumentData
+        public bool IsArgument
         {
-            get { return false; }
+            get { return true; }
+        }
+
+        /// <summary>
+        /// Gets the packet array data for the element.
+        /// </summary>        
+        public byte[] ToPacketArray()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

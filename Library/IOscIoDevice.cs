@@ -10,19 +10,24 @@ using System;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Interface for OSC packet IO devices
+    /// I/O device interface
     /// </summary>
-    public interface IOscPacketIODevice
+    public interface IOscIoDevice
     {
         /// <summary>
         /// Raised when a send operation completes.
         /// </summary>
-        event EventHandler<OscPacketIOEventArgs> SendCompleted;
+        event EventHandler<OscIoDeviceEventArgs> SendCompleted;
 
         /// <summary>
         /// Raised when a packet is received.
         /// </summary>
-        event EventHandler<OscPacketIOEventArgs> ReceiveCompleted;
+        event EventHandler<OscIoDeviceEventArgs> ReceiveCompleted;
+
+        /// <summary>
+        /// Raised when an I/O error occurs.
+        /// </summary>
+        event EventHandler<OscIoDeviceEventArgs> Error;
 
         /// <summary>
         /// Sends an OSC message to the given device address.
@@ -30,7 +35,7 @@ namespace OpenSoundControl
         /// <param name="message">OSC message to send.</param>
         /// <param name="deviceAddress">Device address to send to.</param>
         void Send(OscMessage message,
-                  OscPacketIODeviceAddress deviceAddress);
+                  OscIoDeviceAddress deviceAddress);
 
         /// <summary>
         /// Sends a OSC bundle to the given device address.
@@ -38,6 +43,6 @@ namespace OpenSoundControl
         /// <param name="bundle">OSC bundle to send.</param>
         /// <param name="deviceAddress">Device address to send to.</param>
         void Send(OscBundle bundle,
-                  OscPacketIODeviceAddress deviceAddress);
+                  OscIoDeviceAddress deviceAddress);
     }
 }

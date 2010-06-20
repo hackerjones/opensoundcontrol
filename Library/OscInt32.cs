@@ -10,9 +10,9 @@ using System;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an OSC signed 32-bit integer.
+    /// Encapsulates an signed integer
     /// </summary>
-    public class OscInt32 : IOscDataType
+    public class OscInt32 : IOscElement
     {
         /// <summary>
         /// Creates a OSC signed 32-bit integer with the value of zero.
@@ -34,25 +34,6 @@ namespace OpenSoundControl
         /// </summary>
         public int Value { get; set; }
 
-        #region IOscDataType Members
-
-        /// <summary>
-        /// Gets the OSC data type.
-        /// </summary>        
-        public OscDataType DataType
-        {
-            get { return OscDataType.Int32; }
-        }
-
-        /// <summary>
-        /// Gets if the type has associated argument data.
-        /// </summary>
-        public bool HasArgumentData
-        {
-            get { return true; }
-        }
-
-        #endregion
 
         /// <summary>
         /// Converts the OSC signed 32-bit integer to a string.
@@ -61,5 +42,33 @@ namespace OpenSoundControl
         {
             return Convert.ToString(Value);
         }
+
+        #region Implementation of IOscElement
+
+        /// <summary>
+        /// Gets the element type.
+        /// </summary>        
+        public OscElementType ElementType
+        {
+            get { return OscElementType.Int32; }
+        }
+
+        /// <summary>
+        ///  True if the element is also an argument
+        /// </summary>
+        public bool IsArgument
+        {
+            get { return true; }
+        }
+
+        /// <summary>
+        /// Gets the packet array data for the element.
+        /// </summary>        
+        public byte[] ToPacketArray()
+        {
+            return OscPacket.ToPacketArray(Value);
+        }
+
+        #endregion
     }
 }

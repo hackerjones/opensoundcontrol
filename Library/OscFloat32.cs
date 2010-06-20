@@ -10,9 +10,9 @@ using System;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an OSC 32-bit floating point number.
+    /// Encapsulates a float.
     /// </summary>
-    public class OscFloat32 : IOscDataType
+    public class OscFloat32 : IOscElement
     {
         /// <summary>
         /// Creates a default OSC float. 
@@ -34,25 +34,6 @@ namespace OpenSoundControl
         /// </summary>
         public float Value { get; set; }
 
-        #region IOscDataType Members
-
-        /// <summary>
-        /// Gets the OSC data type.
-        /// </summary>        
-        public OscDataType DataType
-        {
-            get { return OscDataType.Float32; }
-        }
-
-        /// <summary>
-        /// Gets if the type has associated argument data.
-        /// </summary>
-        public bool HasArgumentData
-        {
-            get { return true; }
-        }
-
-        #endregion
 
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
@@ -65,5 +46,33 @@ namespace OpenSoundControl
         {
             return Convert.ToString(Value);
         }
+
+        #region Implementation of IOscElement
+
+        /// <summary>
+        /// Gets the element type.
+        /// </summary>        
+        public OscElementType ElementType
+        {
+            get { return OscElementType.Float32; }
+        }
+
+        /// <summary>
+        ///  True if the element is also an argument
+        /// </summary>
+        public bool IsArgument
+        {
+            get { return true; }
+        }
+
+        /// <summary>
+        /// Gets the packet array data for the element.
+        /// </summary>        
+        public byte[] ToPacketArray()
+        {
+            return OscPacket.ToPacketArray(Value);
+        }
+
+        #endregion
     }
 }

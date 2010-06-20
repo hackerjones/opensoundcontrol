@@ -5,96 +5,72 @@
  * binary distributions or online at
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
-using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an OSC blob.
+    ///   Encapsulates an blob.
     /// </summary>
-    public class OscBlob : IOscDataType
+    public class OscBlob : IOscElement
     {
-        private List<byte> _buffer = new List<byte>();
-
         /// <summary>
-        /// Creates an empty OSC blob.
+        ///   Creates an empty blob.
         /// </summary>
         public OscBlob()
         {
+            Buffer = new List<byte>();
         }
 
         /// <summary>
-        /// Creates an OSC blob from buffer.
+        ///   Creates an OSC from the enumerable.
         /// </summary>
         public OscBlob(IEnumerable<byte> buffer)
+            : this()
         {
             Buffer.AddRange(buffer);
         }
 
         /// <summary>
-        /// Creates an OSC blob from a byte array segment.
+        ///   Gets or sets the byte list that contains the blob data.
         /// </summary>
-        public OscBlob(ArraySegment<byte> bufferSeg)
+        public List<byte> Buffer { get; set; }
+
+        /// <summary>
+        ///   Converts the blob data to a string.
+        /// </summary>
+        public override string ToString()
         {
-            for (int i = bufferSeg.Offset; i < (bufferSeg.Offset + bufferSeg.Count); i++)
-            {
-                Buffer.Add(bufferSeg.Array[i]);
-            }
+            return Encoding.UTF8.GetString(Buffer.ToArray());
+        }
+
+        #region Implementation of IOscElement
+
+        /// <summary>
+        ///   Gets the element type.
+        /// </summary>
+        public OscElementType ElementType
+        {
+            get { return OscElementType.Blob; }
         }
 
         /// <summary>
-        /// Gets or sets the byte list that contains the blob data.
+        ///   True if the element is also an argument
         /// </summary>
-        public List<byte> Buffer
-        {
-            get { return _buffer; }
-            set
-            {
-                // don't allow the list to be set to null
-                if (value == null)
-                    _buffer.Clear();
-                else
-                    _buffer = value;
-            }
-        }
-
-
-        /// <summary>
-        /// Gets the empty state of the blob.
-        /// </summary>
-        public bool IsEmpty
-        {
-            get { return (_buffer.Count < 1); }
-        }
-
-        #region IOscDataType Members
-
-        /// <summary>
-        /// Gets the OSC data type.
-        /// </summary>        
-        public OscDataType DataType
-        {
-            get { return OscDataType.Blob; }
-        }
-
-        /// <summary>
-        /// Gets if the type has associated argument data.
-        /// </summary>
-        public bool HasArgumentData
+        public bool IsArgument
         {
             get { return true; }
         }
 
-        #endregion
-
         /// <summary>
-        /// Converts the OSC blob data to a string.
+        ///   Gets the packet array data for the element.
         /// </summary>
-        public override string ToString()
+        public byte[] ToPacketArray()
         {
-            return Encoding.UTF8.GetString(_buffer.ToArray());
+            return OscPacket.PadArray(Buffer.ToArray());
         }
+
+        #endregion
     }
 }

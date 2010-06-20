@@ -5,46 +5,44 @@
  * binary distributions or online at
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
-using System.Collections.Generic;
+using System;
 
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an OSC bundle.
+    /// Encapsulates a bundle element.
     /// </summary>
-    public class OscBundle : IOscBundleElement
+    public class OscBundle : IOscElement
     {
-        private List<IOscBundleElement> _elements = new List<IOscBundleElement>();
-
-        /// <summary>
-        /// Gets or sets the list containing the bundle elements
-        /// </summary>
-        public List<IOscBundleElement> Elements
-        {
-            get { return _elements; }
-            set
-            {
-                // don't allow elements to be set to null
-                if (value == null)
-                    _elements.Clear();
-                else
-                    _elements = value;
-            }
-        }
-
         /// <summary>
         /// Gets the bundle timetag. 
         /// </summary>
         public OscTimetag Timetag { get; set; }
 
-        #region IOscBundleElement Members
+        #region Implementation of IOscElement
 
         /// <summary>
-        /// Gets the type of bundle element.
-        /// </summary>
-        public OscBundleElementType BundleElementType
+        /// Gets the element type.
+        /// </summary>        
+        public OscElementType ElementType
         {
-            get { return OscBundleElementType.Bundle; }
+            get { return OscElementType.Bundle; }
+        }
+
+        /// <summary>
+        ///  True if the element is also an argument
+        /// </summary>
+        public bool IsArgument
+        {
+            get { return false; }
+        }
+
+        /// <summary>
+        /// Gets the packet array data for the element.
+        /// </summary>        
+        public byte[] ToPacketArray()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

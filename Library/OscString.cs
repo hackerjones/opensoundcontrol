@@ -6,22 +6,21 @@
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
 using System;
+using System.Text;
 
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an OSC string.
+    /// Encapsulates an string.
     /// </summary>
-    public class OscString : IOscDataType
+    public class OscString : IOscElement
     {
-        private string _value;
-
         /// <summary>
-        /// Creates an empty OSC string.
+        /// Creates an empty string.
         /// </summary>
         public OscString()
         {
-            _value = String.Empty;
+            Value = String.Empty;
         }
 
         /// <summary>
@@ -34,43 +33,7 @@ namespace OpenSoundControl
         }
 
         /// <value>String value</value>
-        public string Value
-        {
-            get { return _value; }
-            set
-            {
-                if (value == null)
-                {
-                    _value = String.Empty;
-                }
-            }
-        }
-
-        /// <value>True if empty</value>
-        public bool IsEmpty
-        {
-            get { return _value.Length < 1; }
-        }
-
-        #region IOscDataType Members
-
-        /// <summary>
-        /// Gets the OSC data type.
-        /// </summary>        
-        public OscDataType DataType
-        {
-            get { return OscDataType.String; }
-        }
-
-        /// <summary>
-        /// Gets if the type has associated argument data.
-        /// </summary>
-        public bool HasArgumentData
-        {
-            get { return true; }
-        }
-
-        #endregion
+        public string Value { get; set; }
 
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
@@ -81,7 +44,35 @@ namespace OpenSoundControl
         /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
-            return _value;
+            return Value;
         }
+
+        #region Implementation of IOscElement
+
+        /// <summary>
+        /// Gets the element type.
+        /// </summary>        
+        public OscElementType ElementType
+        {
+            get { return OscElementType.String; }
+        }
+
+        /// <summary>
+        ///  True if the element is also an argument
+        /// </summary>
+        public bool IsArgument
+        {
+            get { return true; }
+        }
+
+        /// <summary>
+        /// Gets the packet array data for the element.
+        /// </summary>        
+        public byte[] ToPacketArray()
+        {
+            return OscPacket.PadArray(Encoding.ASCII.GetBytes(Value));
+        }
+
+        #endregion
     }
 }

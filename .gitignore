@@ -1,11 +1,30 @@
 
-[Bb]in/
-[Oo]bj/
-Library/Documents/
-*.user
-*.suo
-*.sln.cache
+#ignore thumbnails created by windows
+Thumbs.db
+#Ignore files build by Visual Studio
 *.obj
 *.exe
-Thumbs.db
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
 _ReSharper*/
+[Tt]est[Rr]esult*
+Library/Documents/

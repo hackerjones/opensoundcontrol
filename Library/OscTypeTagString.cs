@@ -7,99 +7,133 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an OSC type tag string.
+    ///   Encapsulates a type tag string.
     /// </summary>
-    public class OscTypeTagString
+    public class OscTypeTagString : IOscElement
     {
-        private List<IOscDataType> _arguments = new List<IOscDataType>();
+        private List<OscElementType> _arguments;
 
-        /// <summary>
-        /// Creates an empty type tag string
-        /// </summary>
+        ///<summary>
+        ///  Creates an empty type tag string.
+        ///</summary>
         public OscTypeTagString()
         {
+            Arguments = new List<OscElementType>();
         }
 
         /// <summary>
-        /// Creates a type tag string from the enumerable.
-        /// </summary>        
-        public OscTypeTagString(IEnumerable<IOscDataType> args)
-        {
-            _arguments.AddRange((args));
-        }
-
-        /// <summary>
-        /// Gets or sets the argument list
+        ///   Creates an type tag string from an enumerable.
         /// </summary>
-        public List<IOscDataType> Arguments
+        public OscTypeTagString(IEnumerable<OscElementType> args)
+        {
+            FilterArguments(args);
+        }
+
+        /// <summary>
+        ///   Gets and sets the argument list.
+        /// </summary>
+        public List<OscElementType> Arguments
         {
             get { return _arguments; }
-            set
-            {
-                if (value != null)
-                {
-                    _arguments = value;
-                }
-                else
-                {
-                    _arguments.Clear();
-                }
-            }
+            set { FilterArguments(value); }
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        ///   Gets the type tag string as an OSC string.
+        /// </summary>
+        public OscString Value
+        {
+            get { return new OscString(ToString()); }
+        }
+
+        /// <summary>
+        ///   Filters out non argument elements before putting them in the list
+        /// </summary>
+        private void FilterArguments(IEnumerable<OscElementType> args)
+        {
+            var names = Enum.GetNames(typeof(OscElementType)).Skip(4);
+            _arguments = args.Where(i => names.Contains(i.ToString())).ToList();
+        }
+
+        /// <summary>
+        ///   Returns a <see cref = "T:System.String" /> that represents the current <see cref = "T:System.Object" />.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        ///   A <see cref = "T:System.String" /> that represents the current <see cref = "T:System.Object" />.
         /// </returns>
         /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
-            throw new NotImplementedException();
+            var sb = new StringBuilder();
+            sb.Append(',');
+            foreach (OscElementType argument in _arguments)
+            {
+                sb.Append(TypeTagChar(argument));
+            }
+            return sb.ToString();
+        }
+
+        #region Implementation of IOscElement
+
+        /// <summary>
+        ///   Gets the element type.
+        /// </summary>
+        public OscElementType ElementType
+        {
+            get { return OscElementType.TypeTagString; }
         }
 
         /// <summary>
-        /// Gets the type tag character for the given OSC data type.
+        ///   True if the element is also an argument
         /// </summary>
-        public char DataTypeToTypeTag(OscDataType type)
+        public bool IsArgument
+        {
+            get { return false; }
+        }
+
+        /// <summary>
+        ///   Gets the packet array data for the element.
+        /// </summary>
+        public byte[] ToPacketArray()
+        {
+            return Value.ToPacketArray();
+        }
+
+        private static char TypeTagChar(OscElementType type)
         {
             switch (type)
             {
-                case OscDataType.Blob:
-                    return 'b';
-
-                case OscDataType.Float32:
-                    return 'f';
-
-                case OscDataType.Int32:
+                case OscElementType.Int32:
                     return 'i';
-
-                case OscDataType.String:
+                case OscElementType.UInt32:
+                    return 'u';
+                case OscElementType.Float32:
+                    return 'f';
+                case OscElementType.String:
                     return 's';
-
-                case OscDataType.True:
+                case OscElementType.Blob:
+                    return 'b';
+                case OscElementType.True:
                     return 'T';
-
-                case OscDataType.False:
+                case OscElementType.False:
                     return 'F';
-
-                case OscDataType.Null:
+                case OscElementType.Null:
                     return 'N';
-
-                case OscDataType.Impulse:
+                case OscElementType.Impulse:
                     return 'I';
-
-                case OscDataType.Timetag:
+                case OscElementType.Timetag:
                     return 't';
-
                 default:
-                    throw new ArgumentException("Invalid OSC data type");
+                    throw new ArgumentOutOfRangeException("type");
             }
         }
+
+        #endregion
     }
 }

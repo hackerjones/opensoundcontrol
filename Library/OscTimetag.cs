@@ -10,31 +10,34 @@ using System;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an OSC timetag
+    /// Encapsulates an timetag
     /// </summary>
-    public class OscTimetag : IOscDataType
+    public class OscTimetag : IOscElement
     {
-        public OscTimetag()
-        {
-            throw new NotImplementedException();
-        }
-
-        #region IOscDataType Members
+        #region Implementation of IOscElement
 
         /// <summary>
-        /// Gets the OSC data type.
+        /// Gets the element type.
         /// </summary>        
-        public OscDataType DataType
+        public OscElementType ElementType
         {
-            get { return OscDataType.Timetag; }
+            get { throw new NotImplementedException(); }
         }
 
         /// <summary>
-        /// Gets if the type has associated argument data.
+        ///  True if the element is also an argument
         /// </summary>
-        public bool HasArgumentData
+        public bool IsArgument
         {
             get { return true; }
+        }
+
+        /// <summary>
+        /// Gets the packet array data for the element.
+        /// </summary>        
+        public byte[] ToPacketArray()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

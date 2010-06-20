@@ -8,28 +8,23 @@
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Bundle element type enumeration.
+    /// Element interface.
     /// </summary>
-    public enum OscBundleElementType
+    public interface IOscElement
     {
         /// <summary>
-        /// Message element
-        /// </summary>
-        Message,
-        /// <summary>
-        /// Bundle element
-        /// </summary>
-        Bundle
-    }
+        /// Gets the element type.
+        /// </summary>        
+        OscElementType ElementType { get; }
 
-    /// <summary>
-    /// Interface for OSC bundle elements
-    /// </summary>
-    public interface IOscBundleElement
-    {
         /// <summary>
-        /// Gets the type of bundle element.
+        ///  True if the element is also an argument
         /// </summary>
-        OscBundleElementType BundleElementType { get; }
+        bool IsArgument { get; }
+
+        /// <summary>
+        /// Gets the packet array data for the element.
+        /// </summary>        
+        byte[] ToPacketArray();
     }
 }
