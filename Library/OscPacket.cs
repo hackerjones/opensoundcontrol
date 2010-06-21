@@ -65,6 +65,9 @@ namespace OpenSoundControl
             return ToPacketArray((int)ho);
         }
 
+        /// <summary>
+        ///   Parses a packet.
+        /// </summary>
         public static IOscElement Parse(byte[] packet)
         {
             if (packet == null) throw new ArgumentNullException("packet");
@@ -81,18 +84,51 @@ namespace OpenSoundControl
             return packetText.StartsWith("#bundle");
         }
 
+        /// <summary>
+        ///   Parses a message packet.
+        /// </summary>
         private static OscMessage ParseMessage(byte[] packet)
         {
-            throw new NotImplementedException();
+            uint packetIndex = 0;
+
+            OscAddress addr = ExtractAddress(packet, ref packetIndex);
+            OscTypeTagString typeTagString = ExtractTypeTagString(packet, ref packetIndex);
         }
 
+        /// <summary>
+        ///   Extracts an address from a message packet.
+        /// </summary>
+        private static OscAddress ExtractAddress(byte[] packet,
+                                                 ref uint packetIndex)
+        {
+            string packetText = Encoding.ASCII.GetString(packet, (int)packetIndex, packet.Length - (int)packetIndex);
+            int left = packetText.IndexOf('/');
+            int right = packetText.IndexOf(',');
+            packetIndex = (uint)right;
+            string addrText = packetText.Substring(left, right - left);
+            return new OscAddress(addrText);
+        }
+
+        /// <summary>
+        ///   Extracts a type tag string from a packet.
+        /// </summary>
+        private static OscTypeTagString ExtractTypeTagString(byte[] packet,
+                                                             ref uint packetIndex)
+        {
+        }
+
+        /// <summary>
+        ///   Parses a bundle packet.
+        /// </summary>
         private static OscBundle ParseBundle(byte[] packet)
         {
             uint packetIndex = 8; // skip #bundle
 
-            var bundle = new OscBundle();
+            var bundle = new OscBundle
+                             {
+                                 Timetag = ExtractTimetag(packet, ref packetIndex)
+                             };
 
-            bundle.Timetag = ExtractTimetag(packet, ref packetIndex);
             do
             {
                 uint size = ExtractBundleElementSize(packet, ref packetIndex);
@@ -110,6 +146,9 @@ namespace OpenSoundControl
             return null;
         }
 
+        /// <summary>
+        ///   Extracts a timetag from a packet.
+        /// </summary>
         private static unsafe OscTimetag ExtractTimetag(byte[] packet,
                                                         ref uint packetIndex)
         {
@@ -125,6 +164,9 @@ namespace OpenSoundControl
             return new OscTimetag(tmp64);
         }
 
+        /// <summary>
+        ///   Extracts a size of a bundle element from a packet.
+        /// </summary>
         private static unsafe uint ExtractBundleElementSize(byte[] packet,
                                                             ref uint packetIndex)
         {
@@ -140,6 +182,9 @@ namespace OpenSoundControl
             return tmp32;
         }
 
+        /// <summary>
+        ///   Extracts a bundle element from a packet.
+        /// </summary>
         private static byte[] ExtractBundleElement(byte[] packet,
                                                    ref uint packetIndex,
                                                    uint size)
