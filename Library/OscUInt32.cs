@@ -70,7 +70,7 @@ namespace OpenSoundControl
         /// </summary>        
         public byte[] ToPacketArray()
         {
-            throw new NotImplementedException();
+            return OscPacket.ToPacketArray(Value);
         }
 
         #endregion

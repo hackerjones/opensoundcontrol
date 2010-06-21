@@ -60,10 +60,7 @@ namespace OpenSoundControl
 
             // must not contain any of these characters
             MatchCollection badChars = Regex.Matches(addr, @"[\]\[\}\{\*#,\?\s]");
-            if (badChars.Count > 0)
-                return false;
-
-            return true;
+            return badChars.Count <= 0;
         }
 
         /// <summary>

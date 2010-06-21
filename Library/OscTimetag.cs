@@ -6,26 +6,32 @@
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
 using System;
+using System.Net;
 
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an timetag
+    ///   Encapsulates an timetag
     /// </summary>
     public class OscTimetag : IOscElement
     {
+        public OscTimetag(ulong value)
+        {
+            Value = value;
+        }
+
         #region Implementation of IOscElement
 
         /// <summary>
-        /// Gets the element type.
-        /// </summary>        
+        ///   Gets the element type.
+        /// </summary>
         public OscElementType ElementType
         {
-            get { throw new NotImplementedException(); }
+            get { return OscElementType.Timetag; }
         }
 
         /// <summary>
-        ///  True if the element is also an argument
+        ///   True if the element is also an argument
         /// </summary>
         public bool IsArgument
         {
@@ -33,13 +39,26 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets the packet array data for the element.
-        /// </summary>        
+        ///   Gets the packet array data for the element.
+        /// </summary>
         public byte[] ToPacketArray()
         {
-            throw new NotImplementedException();
+            ulong no = (ulong)IPAddress.HostToNetworkOrder((long)Value);
+            unsafe
+            {
+                var buffer = new byte[8];
+                var ptr = (byte*)&no;
+
+                for (int i = 0; i < 8; i++)
+                {
+                    buffer[i] = ptr[i];
+                }
+                return buffer;
+            }
         }
 
         #endregion
+
+        public ulong Value { get; set; }
     }
 }

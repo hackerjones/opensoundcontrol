@@ -81,7 +81,7 @@ namespace OpenSoundControl
         /// </summary>
         private static OscAddress ParseAddress(string value)
         {
-            Match match = Regex.Match(value, @"^(/[\w/]+)");
+            Match match = Regex.Match(value, @"^(/[\w/]*)");
             if (match.Captures.Count != 1)
             {
                 throw new ArgumentException("OSC address not found in input string");
@@ -97,36 +97,32 @@ namespace OpenSoundControl
         {
             var list = new List<IOscElement>();
             MatchCollection matches = Regex.Matches(value, @"\s+(\w+)");
-            foreach (Match match in matches)
+            foreach (string input in
+                from Match match in matches where match.Captures.Count > 0 select match.Captures[0].ToString())
             {
-                if (match.Captures.Count > 0)
+                float f;
+                if (TryParseFloat32(input, out f))
                 {
-                    string input = match.Captures[0].ToString();
-
-                    float f;
-                    if (TryParseFloat32(input, out f))
-                    {
-                        list.Add(new OscFloat32(f));
-                        continue;
-                    }
-
-                    int i;
-                    if (TryParseInt32(input, out i))
-                    {
-                        list.Add(new OscInt32(i));
-                        continue;
-                    }
-
-                    uint ui;
-                    if (TryParseUInt32(input, out ui))
-                    {
-                        list.Add(new OscUInt32(ui));
-                        continue;
-                    }
-
-                    // all else has failed add it as a string
-                    list.Add(new OscString(input));
+                    list.Add(new OscFloat32(f));
+                    continue;
                 }
+
+                int i;
+                if (TryParseInt32(input, out i))
+                {
+                    list.Add(new OscInt32(i));
+                    continue;
+                }
+
+                uint ui;
+                if (TryParseUInt32(input, out ui))
+                {
+                    list.Add(new OscUInt32(ui));
+                    continue;
+                }
+
+                // all else has failed add it as a string
+                list.Add(new OscString(input));
             }
             return list;
         }
