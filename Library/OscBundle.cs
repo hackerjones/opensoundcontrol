@@ -10,27 +10,27 @@ using System;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates a bundle element.
+    ///   Encapsulates a bundle element.
     /// </summary>
     public class OscBundle : IOscElement
     {
         /// <summary>
-        /// Gets the bundle timetag. 
+        ///   Gets the bundle timetag.
         /// </summary>
         public OscTimetag Timetag { get; set; }
 
         #region Implementation of IOscElement
 
         /// <summary>
-        /// Gets the element type.
-        /// </summary>        
+        ///   Gets the element type.
+        /// </summary>
         public OscElementType ElementType
         {
             get { return OscElementType.Bundle; }
         }
 
         /// <summary>
-        ///  True if the element is also an argument
+        ///   True if the element is also an argument
         /// </summary>
         public bool IsArgument
         {
@@ -38,8 +38,8 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets the packet array data for the element.
-        /// </summary>        
+        ///   Gets the packet array data for the element.
+        /// </summary>
         public byte[] ToPacketArray()
         {
             throw new NotImplementedException();

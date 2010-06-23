@@ -1,40 +1,25 @@
-﻿using OpenSoundControl;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenSoundControl;
 
 namespace UnitTests
 {
-    
-    
-    /// <summary>
-    ///This is a test class for OscUdpIoDeviceTest and is intended
-    ///to contain all OscUdpIoDeviceTest Unit Tests
+    ///<summary>
+    ///  This is a test class for OscUdpIoDeviceTest and is intended
+    ///  to contain all OscUdpIoDeviceTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class OscUdpIoDeviceTest
     {
-
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
+        ///<summary>
+        ///  Gets or sets the test context which provides
+        ///  information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
+
         // 
         //You can use the following additional attributes as you write your tests:
         //
@@ -62,133 +47,133 @@ namespace UnitTests
         //{
         //}
         //
+
         #endregion
 
-
-        /// <summary>
-        ///A test for OscUdpIoDevice Constructor
+        ///<summary>
+        ///  A test for OscUdpIoDevice Constructor
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void OscUdpIoDeviceConstructorTest()
         {
             IPEndPoint localEP = null; // TODO: Initialize to an appropriate value
-            OscUdpIoDevice target = new OscUdpIoDevice(localEP);
+            var target = new OscUdpIoDevice(localEP);
             Assert.Inconclusive("TODO: Implement code to verify target");
         }
 
-        /// <summary>
-        ///A test for OscUdpIoDevice Constructor
+        ///<summary>
+        ///  A test for OscUdpIoDevice Constructor
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void OscUdpIoDeviceConstructorTest1()
         {
             int localPort = 0; // TODO: Initialize to an appropriate value
-            OscUdpIoDevice target = new OscUdpIoDevice(localPort);
+            var target = new OscUdpIoDevice(localPort);
             Assert.Inconclusive("TODO: Implement code to verify target");
         }
 
-        /// <summary>
-        ///A test for BeginReceive
+        ///<summary>
+        ///  A test for BeginReceive
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         [DeploymentItem("OpenSoundControl.dll")]
         public void BeginReceiveTest()
         {
             PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            OscUdpIoDevice_Accessor target = new OscUdpIoDevice_Accessor(param0); // TODO: Initialize to an appropriate value
+            var target = new OscUdpIoDevice_Accessor(param0); // TODO: Initialize to an appropriate value
             target.BeginReceive();
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 
-        /// <summary>
-        ///A test for Dispose
+        ///<summary>
+        ///  A test for Dispose
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         [DeploymentItem("OpenSoundControl.dll")]
         public void DisposeTest()
         {
             PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            OscUdpIoDevice_Accessor target = new OscUdpIoDevice_Accessor(param0); // TODO: Initialize to an appropriate value
+            var target = new OscUdpIoDevice_Accessor(param0); // TODO: Initialize to an appropriate value
             bool disposing = false; // TODO: Initialize to an appropriate value
             target.Dispose(disposing);
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 
-        /// <summary>
-        ///A test for Dispose
+        ///<summary>
+        ///  A test for Dispose
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void DisposeTest1()
         {
             IPEndPoint localEP = null; // TODO: Initialize to an appropriate value
-            OscUdpIoDevice target = new OscUdpIoDevice(localEP); // TODO: Initialize to an appropriate value
+            var target = new OscUdpIoDevice(localEP); // TODO: Initialize to an appropriate value
             target.Dispose();
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 
-        /// <summary>
-        ///A test for Finalize
+        ///<summary>
+        ///  A test for Finalize
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         [DeploymentItem("OpenSoundControl.dll")]
         public void FinalizeTest()
         {
             PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            OscUdpIoDevice_Accessor target = new OscUdpIoDevice_Accessor(param0); // TODO: Initialize to an appropriate value
+            var target = new OscUdpIoDevice_Accessor(param0); // TODO: Initialize to an appropriate value
             target.Finalize();
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 
-        /// <summary>
-        ///A test for OnReceive
+        ///<summary>
+        ///  A test for OnReceive
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         [DeploymentItem("OpenSoundControl.dll")]
         public void OnReceiveTest()
         {
             PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            OscUdpIoDevice_Accessor target = new OscUdpIoDevice_Accessor(param0); // TODO: Initialize to an appropriate value
+            var target = new OscUdpIoDevice_Accessor(param0); // TODO: Initialize to an appropriate value
             IAsyncResult ar = null; // TODO: Initialize to an appropriate value
             target.OnReceive(ar);
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 
-        /// <summary>
-        ///A test for OnSend
+        ///<summary>
+        ///  A test for OnSend
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         [DeploymentItem("OpenSoundControl.dll")]
         public void OnSendTest()
         {
             PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            OscUdpIoDevice_Accessor target = new OscUdpIoDevice_Accessor(param0); // TODO: Initialize to an appropriate value
+            var target = new OscUdpIoDevice_Accessor(param0); // TODO: Initialize to an appropriate value
             IAsyncResult ar = null; // TODO: Initialize to an appropriate value
             target.OnSend(ar);
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 
-        /// <summary>
-        ///A test for Send
+        ///<summary>
+        ///  A test for Send
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void SendTest()
         {
             IPEndPoint localEP = null; // TODO: Initialize to an appropriate value
-            OscUdpIoDevice target = new OscUdpIoDevice(localEP); // TODO: Initialize to an appropriate value
+            var target = new OscUdpIoDevice(localEP); // TODO: Initialize to an appropriate value
             OscBundle bundle = null; // TODO: Initialize to an appropriate value
             OscIoDeviceAddress deviceAddress = null; // TODO: Initialize to an appropriate value
             target.Send(bundle, deviceAddress);
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
 
-        /// <summary>
-        ///A test for Send
+        ///<summary>
+        ///  A test for Send
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void SendTest1()
         {
             IPEndPoint localEP = null; // TODO: Initialize to an appropriate value
-            OscUdpIoDevice target = new OscUdpIoDevice(localEP); // TODO: Initialize to an appropriate value
+            var target = new OscUdpIoDevice(localEP); // TODO: Initialize to an appropriate value
             OscMessage message = null; // TODO: Initialize to an appropriate value
             OscIoDeviceAddress deviceAddress = null; // TODO: Initialize to an appropriate value
             target.Send(message, deviceAddress);

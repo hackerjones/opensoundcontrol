@@ -10,19 +10,19 @@ using System;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an signed integer
+    ///   Encapsulates an signed integer
     /// </summary>
     public class OscInt32 : IOscElement
     {
         /// <summary>
-        /// Creates a OSC signed 32-bit integer with the value of zero.
+        ///   Creates a OSC signed 32-bit integer with the value of zero.
         /// </summary>
         public OscInt32()
         {
         }
 
         /// <summary>
-        /// Creates an OSC signed 32-bit integer with the given value.
+        ///   Creates an OSC signed 32-bit integer with the given value.
         /// </summary>
         public OscInt32(int value)
         {
@@ -30,13 +30,13 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets the signed integer value.
+        ///   Gets the signed integer value.
         /// </summary>
         public int Value { get; set; }
 
 
         /// <summary>
-        /// Converts the OSC signed 32-bit integer to a string.
+        ///   Converts the OSC signed 32-bit integer to a string.
         /// </summary>
         public override string ToString()
         {
@@ -46,15 +46,15 @@ namespace OpenSoundControl
         #region Implementation of IOscElement
 
         /// <summary>
-        /// Gets the element type.
-        /// </summary>        
+        ///   Gets the element type.
+        /// </summary>
         public OscElementType ElementType
         {
             get { return OscElementType.Int32; }
         }
 
         /// <summary>
-        ///  True if the element is also an argument
+        ///   True if the element is also an argument
         /// </summary>
         public bool IsArgument
         {
@@ -62,8 +62,8 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets the packet array data for the element.
-        /// </summary>        
+        ///   Gets the packet array data for the element.
+        /// </summary>
         public byte[] ToPacketArray()
         {
             return OscPacket.ToPacketArray(Value);

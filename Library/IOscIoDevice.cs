@@ -10,38 +10,38 @@ using System;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// I/O device interface
+    ///   I/O device interface
     /// </summary>
     public interface IOscIoDevice
     {
         /// <summary>
-        /// Raised when a send operation completes.
+        ///   Raised when a send operation completes.
         /// </summary>
         event EventHandler<OscIoDeviceEventArgs> SendCompleted;
 
         /// <summary>
-        /// Raised when a packet is received.
+        ///   Raised when a packet is received.
         /// </summary>
         event EventHandler<OscIoDeviceEventArgs> ReceiveCompleted;
 
         /// <summary>
-        /// Raised when an I/O error occurs.
+        ///   Raised when an I/O error occurs.
         /// </summary>
         event EventHandler<OscIoDeviceEventArgs> Error;
 
         /// <summary>
-        /// Sends an OSC message to the given device address.
+        ///   Sends an OSC message to the given device address.
         /// </summary>
-        /// <param name="message">OSC message to send.</param>
-        /// <param name="deviceAddress">Device address to send to.</param>
+        /// <param name = "message">OSC message to send.</param>
+        /// <param name = "deviceAddress">Device address to send to.</param>
         void Send(OscMessage message,
                   OscIoDeviceAddress deviceAddress);
 
         /// <summary>
-        /// Sends a OSC bundle to the given device address.
+        ///   Sends a OSC bundle to the given device address.
         /// </summary>
-        /// <param name="bundle">OSC bundle to send.</param>
-        /// <param name="deviceAddress">Device address to send to.</param>
+        /// <param name = "bundle">OSC bundle to send.</param>
+        /// <param name = "deviceAddress">Device address to send to.</param>
         void Send(OscBundle bundle,
                   OscIoDeviceAddress deviceAddress);
     }

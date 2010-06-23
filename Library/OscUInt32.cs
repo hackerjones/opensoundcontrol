@@ -10,19 +10,19 @@ using System;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an unsigned integer.
+    ///   Encapsulates an unsigned integer.
     /// </summary>
     public class OscUInt32 : IOscElement
     {
         /// <summary>
-        /// Creates a OSC unsigned 32-bit integer with the value of zero.
+        ///   Creates a OSC unsigned 32-bit integer with the value of zero.
         /// </summary>
         public OscUInt32()
         {
         }
 
         /// <summary>
-        /// Creates an OSC unsigned 32-bit integer with the given value.
+        ///   Creates an OSC unsigned 32-bit integer with the given value.
         /// </summary>
         public OscUInt32(uint value)
         {
@@ -30,16 +30,16 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets the unsigned integer value.
+        ///   Gets the unsigned integer value.
         /// </summary>
         public uint Value { get; set; }
 
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        ///   Returns a <see cref = "T:System.String" /> that represents the current <see cref = "T:System.Object" />.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        ///   A <see cref = "T:System.String" /> that represents the current <see cref = "T:System.Object" />.
         /// </returns>
         /// <filterpriority>2</filterpriority>
         public override string ToString()
@@ -50,15 +50,15 @@ namespace OpenSoundControl
         #region Implementation of IOscElement
 
         /// <summary>
-        /// Gets the element type.
-        /// </summary>        
+        ///   Gets the element type.
+        /// </summary>
         public OscElementType ElementType
         {
             get { return OscElementType.UInt32; }
         }
 
         /// <summary>
-        ///  True if the element is also an argument
+        ///   True if the element is also an argument
         /// </summary>
         public bool IsArgument
         {
@@ -66,8 +66,8 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets the packet array data for the element.
-        /// </summary>        
+        ///   Gets the packet array data for the element.
+        /// </summary>
         public byte[] ToPacketArray()
         {
             return OscPacket.ToPacketArray(Value);

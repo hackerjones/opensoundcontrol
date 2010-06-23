@@ -11,7 +11,7 @@ using System.Net;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an I/O device address.
+    ///   Encapsulates an I/O device address.
     /// </summary>
     public class OscIoDeviceAddress
     {
@@ -19,11 +19,11 @@ namespace OpenSoundControl
         private readonly OscIoDeviceAddressType _type;
 
         /// <summary>
-        /// Creates a device address for IP address types
+        ///   Creates a device address for IP address types
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="localEP"></param>
-        /// <exception cref="ArgumentException"></exception>
+        /// <param name = "type"></param>
+        /// <param name = "localEP"></param>
+        /// <exception cref = "ArgumentException"></exception>
         public OscIoDeviceAddress(OscIoDeviceAddressType type,
                                   IPEndPoint localEP)
         {
@@ -36,7 +36,7 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets the device address type.
+        ///   Gets the device address type.
         /// </summary>
         public OscIoDeviceAddressType Type
         {
@@ -44,7 +44,7 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets the device address as an IPEndPoint.
+        ///   Gets the device address as an IPEndPoint.
         /// </summary>
         public IPEndPoint IPEndPoint
         {

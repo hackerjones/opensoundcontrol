@@ -13,7 +13,7 @@ using System.Text;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Contains methods for sending and receiving OSC packets over UDP.
+    ///   Contains methods for sending and receiving OSC packets over UDP.
     /// </summary>
     public class OscUdpIoDevice : IDisposable, IOscIoDevice
     {
@@ -21,8 +21,8 @@ namespace OpenSoundControl
         private bool _disposed;
 
         /// <summary>
-        /// Creates a UDP I/O device using the given local port number.
-        /// </summary>        
+        ///   Creates a UDP I/O device using the given local port number.
+        /// </summary>
         public OscUdpIoDevice(int localPort)
         {
             _udp = new UdpClient(localPort) { EnableBroadcast = true };
@@ -30,8 +30,8 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Creates a UDP I/O device using the given local end point        
-        /// </summary>        
+        ///   Creates a UDP I/O device using the given local end point
+        /// </summary>
         public OscUdpIoDevice(IPEndPoint localEP)
         {
             _udp = new UdpClient(localEP);
@@ -41,7 +41,7 @@ namespace OpenSoundControl
         #region IDisposable Members
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        ///   Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         /// <filterpriority>2</filterpriority>
         public void Dispose()
@@ -55,24 +55,24 @@ namespace OpenSoundControl
         #region IOscIoDevice Members
 
         /// <summary>
-        /// Raised when a send operation completes.
+        ///   Raised when a send operation completes.
         /// </summary>
         public event EventHandler<OscIoDeviceEventArgs> SendCompleted;
 
         /// <summary>
-        /// Raised when a packet is received.
+        ///   Raised when a packet is received.
         /// </summary>
         public event EventHandler<OscIoDeviceEventArgs> ReceiveCompleted;
 
 
         /// <summary>
-        /// Raised when an I/O error occurs.
+        ///   Raised when an I/O error occurs.
         /// </summary>
         public event EventHandler<OscIoDeviceEventArgs> Error;
 
         /// <summary>
-        /// Sends an OSC message to the given UDP address.
-        /// </summary>        
+        ///   Sends an OSC message to the given UDP address.
+        /// </summary>
         public void Send(
             OscMessage message,
             OscIoDeviceAddress deviceAddress
@@ -89,7 +89,7 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Sends a OSC bundle to the given UDP address.
+        ///   Sends a OSC bundle to the given UDP address.
         /// </summary>
         public void Send(
             OscBundle bundle,
@@ -109,7 +109,7 @@ namespace OpenSoundControl
         #endregion
 
         /// <summary>
-        /// Allows an <see cref="T:System.Object"/> to attempt to free resources and perform other cleanup operations before the <see cref="T:System.Object"/> is reclaimed by garbage collection.
+        ///   Allows an <see cref = "T:System.Object" /> to attempt to free resources and perform other cleanup operations before the <see cref = "T:System.Object" /> is reclaimed by garbage collection.
         /// </summary>
         ~OscUdpIoDevice()
         {

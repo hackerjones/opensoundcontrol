@@ -5,7 +5,6 @@
  * binary distributions or online at
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +16,41 @@ namespace OpenSoundControl
     /// </summary>
     public class OscTypeTagString : IOscElement
     {
+        private static readonly Dictionary<char, OscElementType> _charToType;
+        private static readonly Dictionary<OscElementType, char> _typeToChar;
+
         private List<OscElementType> _arguments;
+
+        static OscTypeTagString()
+        {
+            _charToType = new Dictionary<char, OscElementType>
+                              {
+                                  { 'i', OscElementType.Int32 },
+                                  { 'u', OscElementType.UInt32 },
+                                  { 'f', OscElementType.Float32 },
+                                  { 's', OscElementType.String },
+                                  { 'b', OscElementType.Blob },
+                                  { 'T', OscElementType.True },
+                                  { 'F', OscElementType.False },
+                                  { 'N', OscElementType.Null },
+                                  { 'I', OscElementType.Impulse },
+                                  { 't', OscElementType.Timetag }
+                              };
+
+            _typeToChar = new Dictionary<OscElementType, char>
+                              {
+                                  { OscElementType.Int32, 'i' },
+                                  { OscElementType.UInt32, 'u' },
+                                  { OscElementType.Float32, 'f' },
+                                  { OscElementType.String, 's' },
+                                  { OscElementType.Blob, 'b' },
+                                  { OscElementType.True, 'T' },
+                                  { OscElementType.False, 'F' },
+                                  { OscElementType.Null, 'N' },
+                                  { OscElementType.Impulse, 'I' },
+                                  { OscElementType.Timetag, 't' }
+                              };
+        }
 
         ///<summary>
         ///  Creates an empty type tag string.
@@ -28,11 +61,23 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        ///   Creates an type tag string from an enumerable.
+        ///   Creates a type tag string from an enumerable.
         /// </summary>
         public OscTypeTagString(IEnumerable<OscElementType> args)
         {
             FilterArguments(args);
+        }
+
+        ///<summary>
+        ///  Creates a type tag string from a string.
+        ///</summary>
+        public OscTypeTagString(string str)
+            : this()
+        {
+            foreach (char c in str.Where(i => _charToType.ContainsKey(i)))
+            {
+                Arguments.Add(_charToType[c]);
+            }
         }
 
         /// <summary>
@@ -57,8 +102,7 @@ namespace OpenSoundControl
         /// </summary>
         private void FilterArguments(IEnumerable<OscElementType> args)
         {
-            var names = Enum.GetNames(typeof(OscElementType)).Skip(4);
-            _arguments = args.Where(i => names.Contains(i.ToString())).ToList();
+            _arguments = args.Where(i => _typeToChar.ContainsKey(i)).ToList();
         }
 
         /// <summary>
@@ -74,7 +118,7 @@ namespace OpenSoundControl
             sb.Append(',');
             foreach (OscElementType argument in _arguments)
             {
-                sb.Append(TypeTagChar(argument));
+                sb.Append(_typeToChar[argument]);
             }
             return sb.ToString();
         }
@@ -103,35 +147,6 @@ namespace OpenSoundControl
         public byte[] ToPacketArray()
         {
             return Value.ToPacketArray();
-        }
-
-        private static char TypeTagChar(OscElementType type)
-        {
-            switch (type)
-            {
-                case OscElementType.Int32:
-                    return 'i';
-                case OscElementType.UInt32:
-                    return 'u';
-                case OscElementType.Float32:
-                    return 'f';
-                case OscElementType.String:
-                    return 's';
-                case OscElementType.Blob:
-                    return 'b';
-                case OscElementType.True:
-                    return 'T';
-                case OscElementType.False:
-                    return 'F';
-                case OscElementType.Null:
-                    return 'N';
-                case OscElementType.Impulse:
-                    return 'I';
-                case OscElementType.Timetag:
-                    return 't';
-                default:
-                    throw new ArgumentOutOfRangeException("type");
-            }
         }
 
         #endregion

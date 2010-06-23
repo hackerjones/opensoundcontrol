@@ -1,64 +1,64 @@
 ﻿namespace OpenSoundControl
 {
     /// <summary>
-    /// Element type enumeration.
+    ///   Element type enumeration.
     /// </summary>
     public enum OscElementType
     {
         /// <summary>
-        /// Message
+        ///   Message
         /// </summary>
         Message,
         /// <summary>
-        /// Bundle
+        ///   Bundle
         /// </summary>
         Bundle,
         /// <summary>
-        /// Address
+        ///   Address
         /// </summary>
         Address,
         /// <summary>
-        /// Type tag string
+        ///   Type tag string
         /// </summary>
         TypeTagString,
         /// <summary>
-        /// Signed integer 32-bits
+        ///   Signed integer 32-bits
         /// </summary>
         Int32,
         /// <summary>
-        /// Unsigned integer 32-bits
+        ///   Unsigned integer 32-bits
         /// </summary>
         UInt32,
         /// <summary>
-        /// Floating point number 32-bits
+        ///   Floating point number 32-bits
         /// </summary>
         Float32,
         /// <summary>
-        /// String
+        ///   String
         /// </summary>
         String,
         /// <summary>
-        /// Blob
+        ///   Blob
         /// </summary>
         Blob,
         /// <summary>
-        /// True
+        ///   True
         /// </summary>
         True,
         /// <summary>
-        /// False
+        ///   False
         /// </summary>
         False,
         /// <summary>
-        /// Null
+        ///   Null
         /// </summary>
         Null,
         /// <summary>
-        /// Impulse
+        ///   Impulse
         /// </summary>
         Impulse,
         /// <summary>
-        /// Timetag
+        ///   Timetag
         /// </summary>
         Timetag
     }

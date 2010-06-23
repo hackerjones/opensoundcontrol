@@ -11,14 +11,14 @@ using System.Text.RegularExpressions;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates an address.
+    ///   Encapsulates an address.
     /// </summary>
     public class OscAddress : IOscElement
     {
         private OscString _value;
 
         /// <summary>
-        /// Creates an empty address
+        ///   Creates an empty address
         /// </summary>
         public OscAddress()
         {
@@ -26,16 +26,16 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Creates an address from the input string.
+        ///   Creates an address from the input string.
         /// </summary>
-        /// <param name="value"></param>
-        public OscAddress(string value)            
+        /// <param name = "value"></param>
+        public OscAddress(string value)
         {
             Value = new OscString(value);
         }
 
         /// <summary>
-        /// Gets or sets the address value as an OSC string.
+        ///   Gets or sets the address value as an OSC string.
         /// </summary>
         public OscString Value
         {
@@ -64,10 +64,10 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        ///   Returns a <see cref = "T:System.String" /> that represents the current <see cref = "T:System.Object" />.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        ///   A <see cref = "T:System.String" /> that represents the current <see cref = "T:System.Object" />.
         /// </returns>
         /// <filterpriority>2</filterpriority>
         public override string ToString()
@@ -78,15 +78,15 @@ namespace OpenSoundControl
         #region Implementation of IOscElement
 
         /// <summary>
-        /// Gets the element type.
-        /// </summary>        
+        ///   Gets the element type.
+        /// </summary>
         public OscElementType ElementType
         {
             get { return OscElementType.Address; }
         }
 
         /// <summary>
-        ///  True if the element is also an argument
+        ///   True if the element is also an argument
         /// </summary>
         public bool IsArgument
         {
@@ -94,8 +94,8 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets the packet array data for the element.
-        /// </summary>        
+        ///   Gets the packet array data for the element.
+        /// </summary>
         public byte[] ToPacketArray()
         {
             return Value.ToPacketArray();

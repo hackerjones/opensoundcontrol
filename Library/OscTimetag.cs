@@ -5,7 +5,6 @@
  * binary distributions or online at
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
-using System;
 using System.Net;
 
 namespace OpenSoundControl
@@ -15,6 +14,9 @@ namespace OpenSoundControl
     /// </summary>
     public class OscTimetag : IOscElement
     {
+        /// <summary>
+        ///   Creates a time tag from the value in NTP format
+        /// </summary>
         public OscTimetag(ulong value)
         {
             Value = value;
@@ -43,7 +45,7 @@ namespace OpenSoundControl
         /// </summary>
         public byte[] ToPacketArray()
         {
-            ulong no = (ulong)IPAddress.HostToNetworkOrder((long)Value);
+            var no = (ulong)IPAddress.HostToNetworkOrder((long)Value);
             unsafe
             {
                 var buffer = new byte[8];
@@ -59,6 +61,9 @@ namespace OpenSoundControl
 
         #endregion
 
+        /// <summary>
+        ///   Time tag in NTP format.
+        /// </summary>
         public ulong Value { get; set; }
     }
 }

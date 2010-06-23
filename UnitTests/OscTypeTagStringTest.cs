@@ -1,43 +1,26 @@
-﻿using System.Text;
-using OpenSoundControl;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenSoundControl;
 
 namespace UnitTests
 {
-
-
-    /// <summary>
-    ///This is a test class for OscTypeTagStringTest and is intended
-    ///to contain all OscTypeTagStringTest Unit Tests
+    ///<summary>
+    ///  This is a test class for OscTypeTagStringTest and is intended
+    ///  to contain all OscTypeTagStringTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class OscTypeTagStringTest
     {
-
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
+        ///<summary>
+        ///  Gets or sets the test context which provides
+        ///  information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
+
         // 
         //You can use the following additional attributes as you write your tests:
         //
@@ -65,13 +48,13 @@ namespace UnitTests
         //{
         //}
         //
+
         #endregion
 
-
-        /// <summary>
-        ///A test for OscTypeTagString Constructor
+        ///<summary>
+        ///  A test for OscTypeTagString Constructor
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void OscTypeTagStringConstructorTest()
         {
             IEnumerable<OscElementType> args = new[]
@@ -85,7 +68,7 @@ namespace UnitTests
                                                        OscElementType.True, OscElementType.TypeTagString,
                                                        OscElementType.UInt32
                                                    };
-            OscTypeTagString target = new OscTypeTagString(args);
+            var target = new OscTypeTagString(args);
             Assert.IsFalse(target.Arguments.Contains(OscElementType.Address));
             Assert.IsTrue(target.Arguments.Contains(OscElementType.Blob));
             Assert.IsFalse(target.Arguments.Contains(OscElementType.Bundle));
@@ -102,20 +85,20 @@ namespace UnitTests
             Assert.IsTrue(target.Arguments.Contains(OscElementType.UInt32));
         }
 
-        /// <summary>
-        ///A test for OscTypeTagString Constructor
+        ///<summary>
+        ///  A test for OscTypeTagString Constructor
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void OscTypeTagStringConstructorTest1()
         {
-            OscTypeTagString target = new OscTypeTagString();
+            var target = new OscTypeTagString();
             Assert.IsFalse(target.Arguments.Count() > 0);
         }
 
-        /// <summary>
-        ///A test for FilterArguments
+        ///<summary>
+        ///  A test for FilterArguments
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         [DeploymentItem("OpenSoundControl.dll")]
         public void FilterArgumentsTest()
         {
@@ -148,10 +131,10 @@ namespace UnitTests
             Assert.IsTrue(target.Arguments.Contains(OscElementType.UInt32));
         }
 
-        /// <summary>
-        ///A test for ToPacketArray
+        ///<summary>
+        ///  A test for ToPacketArray
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void ToPacketArrayTest()
         {
             var target = new OscTypeTagString(new[]
@@ -175,47 +158,33 @@ namespace UnitTests
             }
         }
 
-        /// <summary>
-        ///A test for ToString
+        ///<summary>
+        ///  A test for ToString
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void ToStringTest()
         {
-            OscTypeTagString target = new OscTypeTagString(new[]
-                                                        {
-                                                            OscElementType.Address, OscElementType.Blob,
-                                                            OscElementType.Bundle,
-                                                            OscElementType.False, OscElementType.Float32,
-                                                            OscElementType.Impulse, OscElementType.Int32,
-                                                            OscElementType.Message, OscElementType.Null,
-                                                            OscElementType.String, OscElementType.Timetag,
-                                                            OscElementType.True, OscElementType.TypeTagString,
-                                                            OscElementType.UInt32
-                                                        });
+            var target = new OscTypeTagString(new[]
+                                                  {
+                                                      OscElementType.Address, OscElementType.Blob,
+                                                      OscElementType.Bundle,
+                                                      OscElementType.False, OscElementType.Float32,
+                                                      OscElementType.Impulse, OscElementType.Int32,
+                                                      OscElementType.Message, OscElementType.Null,
+                                                      OscElementType.String, OscElementType.Timetag,
+                                                      OscElementType.True, OscElementType.TypeTagString,
+                                                      OscElementType.UInt32
+                                                  });
             string expected = ",bFfIiNstTu";
             string actual;
             actual = target.ToString();
             Assert.AreEqual(expected, actual);
         }
 
-        /// <summary>
-        ///A test for TypeTagChar
+        ///<summary>
+        ///  A test for Arguments
         ///</summary>
-        [TestMethod()]
-        [DeploymentItem("OpenSoundControl.dll")]
-        public void TypeTagCharTest()
-        {
-            OscElementType type = new OscElementType();
-            char expected = 'i';
-            char actual;
-            actual = OscTypeTagString_Accessor.TypeTagChar(OscElementType.Int32);
-            Assert.AreEqual(expected, actual);
-        }
-
-        /// <summary>
-        ///A test for Arguments
-        ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void ArgumentsTest()
         {
             var target = new OscTypeTagString();
@@ -249,47 +218,47 @@ namespace UnitTests
             Assert.IsTrue(actual.Contains(OscElementType.UInt32));
         }
 
-        /// <summary>
-        ///A test for ElementType
+        ///<summary>
+        ///  A test for ElementType
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void ElementTypeTest()
         {
-            OscTypeTagString target = new OscTypeTagString();
+            var target = new OscTypeTagString();
             OscElementType actual;
             actual = target.ElementType;
             Assert.AreEqual(actual, OscElementType.TypeTagString);
         }
 
-        /// <summary>
-        ///A test for IsArgument
+        ///<summary>
+        ///  A test for IsArgument
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void IsArgumentTest()
         {
-            OscTypeTagString target = new OscTypeTagString();
+            var target = new OscTypeTagString();
             bool actual;
             actual = target.IsArgument;
             Assert.IsFalse(actual);
         }
 
-        /// <summary>
-        ///A test for Value
+        ///<summary>
+        ///  A test for Value
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void ValueTest()
         {
-            OscTypeTagString target = new OscTypeTagString(new[]
-                                                               {
-                                                                   OscElementType.Address, OscElementType.Blob,
-                                                                   OscElementType.Bundle,
-                                                                   OscElementType.False, OscElementType.Float32,
-                                                                   OscElementType.Impulse, OscElementType.Int32,
-                                                                   OscElementType.Message, OscElementType.Null,
-                                                                   OscElementType.String, OscElementType.Timetag,
-                                                                   OscElementType.True, OscElementType.TypeTagString,
-                                                                   OscElementType.UInt32
-                                                               });
+            var target = new OscTypeTagString(new[]
+                                                  {
+                                                      OscElementType.Address, OscElementType.Blob,
+                                                      OscElementType.Bundle,
+                                                      OscElementType.False, OscElementType.Float32,
+                                                      OscElementType.Impulse, OscElementType.Int32,
+                                                      OscElementType.Message, OscElementType.Null,
+                                                      OscElementType.String, OscElementType.Timetag,
+                                                      OscElementType.True, OscElementType.TypeTagString,
+                                                      OscElementType.UInt32
+                                                  });
             OscString actual;
             actual = target.Value;
             Assert.AreEqual(actual.ToString(), ",bFfIiNstTu");

@@ -10,12 +10,12 @@ using System;
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Encapsulates packet IO event arguments
+    ///   Encapsulates packet IO event arguments
     /// </summary>
     public class OscIoDeviceEventArgs : EventArgs
     {
         /// <summary>
-        /// Creates a I/O event argument object which contains an OSC bundle.
+        ///   Creates a I/O event argument object which contains an OSC bundle.
         /// </summary>
         public OscIoDeviceEventArgs(OscBundle bundle,
                                     OscIoDeviceAddress deviceAddress,
@@ -27,7 +27,7 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Creates a I/O event argument object which contains an OSC message.
+        ///   Creates a I/O event argument object which contains an OSC message.
         /// </summary>
         public OscIoDeviceEventArgs(OscMessage message,
                                     OscIoDeviceAddress deviceAddress,
@@ -39,27 +39,27 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets an exception if one occurred.
+        ///   Gets an exception if one occurred.
         /// </summary>
         public Exception Exception { get; set; }
 
         /// <summary>
-        /// Gets the device address.
-        /// </summary>        
+        ///   Gets the device address.
+        /// </summary>
         public OscIoDeviceAddress DeviceAddress { get; set; }
 
         /// <summary>
-        /// Gets the contained message.
+        ///   Gets the contained message.
         /// </summary>
         public OscMessage Message { get; set; }
 
         /// <summary>
-        /// Gets the contained bundle.
+        ///   Gets the contained bundle.
         /// </summary>
         public OscBundle Bundle { get; set; }
 
         /// <summary>
-        /// Gets if the event contains a bundle
+        ///   Gets if the event contains a bundle
         /// </summary>
         public bool HasBundle
         {
@@ -67,7 +67,7 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets if the event contains a message
+        ///   Gets if the event contains a message
         /// </summary>
         public bool HasMessage
         {
@@ -75,7 +75,7 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        /// Gets if the event contains an exception
+        ///   Gets if the event contains an exception
         /// </summary>
         public bool HasException
         {

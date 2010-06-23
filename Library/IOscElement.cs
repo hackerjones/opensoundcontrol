@@ -8,23 +8,23 @@
 namespace OpenSoundControl
 {
     /// <summary>
-    /// Element interface.
+    ///   Element interface.
     /// </summary>
     public interface IOscElement
     {
         /// <summary>
-        /// Gets the element type.
-        /// </summary>        
+        ///   Gets the element type.
+        /// </summary>
         OscElementType ElementType { get; }
 
         /// <summary>
-        ///  True if the element is also an argument
+        ///   True if the element is also an argument
         /// </summary>
         bool IsArgument { get; }
 
         /// <summary>
-        /// Gets the packet array data for the element.
-        /// </summary>        
+        ///   Gets the packet array data for the element.
+        /// </summary>
         byte[] ToPacketArray();
     }
 }
