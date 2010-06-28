@@ -66,9 +66,9 @@ namespace OpenSoundControl
         /// <summary>
         ///   Gets the packet array data for the element.
         /// </summary>
-        public byte[] ToPacketArray()
+        public byte[] ToOscPacketArray()
         {
-            return OscPacket.PadArray(Buffer.ToArray());
+            return Osc.PadArray(Buffer.ToArray());
         }
 
         #endregion

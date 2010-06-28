@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * Copyright (C) Mark Alan Jones 2010
+ * This code is published under the Microsoft Public License (Ms-Pl)
+ * A copy of the Ms-Pl license is included with the source and 
+ * binary distributions or online at
+ * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -6,73 +14,20 @@ using System.Text;
 
 namespace OpenSoundControl
 {
-    internal static class OscPacket
+    /// <summary>
+    ///   Methods for parsing an OSC packet
+    /// </summary>
+    internal static class OscParser
     {
-        /// <summary>
-        ///   Calculates an OSC padded size from a given input size.
-        /// </summary>
-        /// <remarks>
-        ///   OSC requires data items to be 32-bit or 4 byte aligned. 
-        ///   This function is called with the size of an item and will return
-        ///   a new number of bytes the item should be for proper alignment.
-        /// </remarks>
-        public static int PadSize(int size)
-        {
-            int n = size % 4;
-            return n == 0 ? size : size + (4 - n);
-        }
-
-        /// <summary>
-        ///   Pads the array to properly align it for transmission inside an OSC packet.
-        /// </summary>
-        public static byte[] PadArray(byte[] buffer)
-        {
-            if (buffer == null) throw new ArgumentNullException("buffer");
-
-            int rawSize = buffer.Length;
-            int padSize = PadSize(rawSize);
-
-            // padding not required
-            if (rawSize == padSize)
-                return buffer;
-
-            var newBuffer = new byte[padSize];
-            buffer.CopyTo(newBuffer, 0);
-            return newBuffer;
-        }
-
-        public static byte[] ToPacketArray(int ho)
-        {
-            int no = IPAddress.HostToNetworkOrder(ho);
-            unsafe
-            {
-                var buffer = new byte[4];
-                var ptr = (byte*)&no;
-
-                for (int i = 0; i < 4; i++)
-                {
-                    buffer[i] = ptr[i];
-                }
-                return buffer;
-            }
-        }
-
-        public static byte[] ToPacketArray(uint ho)
-        {
-            return ToPacketArray((int)ho);
-        }
-
-        public static byte[] ToPacketArray(float ho)
-        {
-            return ToPacketArray((int)ho);
-        }
-
         /// <summary>
         ///   Parses a packet.
         /// </summary>
         public static IOscElement Parse(byte[] packet)
         {
-            if (packet == null) throw new ArgumentNullException("packet");
+            if (packet == null)
+            {
+                throw new ArgumentNullException("packet");
+            }
 
             return IsBundle(packet) ? (IOscElement)ParseBundle(packet) : ParseMessage(packet);
         }
@@ -93,12 +48,12 @@ namespace OpenSoundControl
         {
             int packetIndex = 0;
 
-            var msg = new OscMessage
-                          {
-                              Address = ParseAddress(packet, ref packetIndex),
-                              Arguments =
-                                  ParseArguments(packet, ref packetIndex)
-                          };
+            OscMessage msg = new OscMessage
+                                 {
+                                     Address = ParseAddress(packet, ref packetIndex),
+                                     Arguments =
+                                         ParseArguments(packet, ref packetIndex)
+                                 };
 
             return msg;
         }
@@ -106,9 +61,11 @@ namespace OpenSoundControl
         private static List<IOscElement> ParseArguments(byte[] packet,
                                                         ref int packetIndex)
         {
+            // get the type tag string
             OscTypeTagString typeTagString = ParseTypeTagString(packet, ref packetIndex);
-            var args = new List<IOscElement>();
 
+            // parse and store arguments in a list
+            List<IOscElement> arguments = new List<IOscElement>();
             foreach (OscElementType elementType in typeTagString.Arguments)
             {
                 switch (elementType)
@@ -120,30 +77,30 @@ namespace OpenSoundControl
                     case OscElementType.Float32:
                         break;
                     case OscElementType.String:
-                        args.Add(ParseString(packet, ref packetIndex));
+                        arguments.Add(ParseString(packet, ref packetIndex));
                         break;
                     case OscElementType.Blob:
                         break;
                     case OscElementType.True:
-                        args.Add(new OscTrue());
+                        arguments.Add(new OscTrue());
                         break;
                     case OscElementType.False:
-                        args.Add(new OscFalse());
+                        arguments.Add(new OscFalse());
                         break;
                     case OscElementType.Null:
-                        args.Add(new OscNull());
+                        arguments.Add(new OscNull());
                         break;
                     case OscElementType.Impulse:
-                        args.Add(new OscImpulse());
+                        arguments.Add(new OscImpulse());
                         break;
                     case OscElementType.Timetag:
-                        args.Add(ParseTimetag(packet, ref packetIndex));
+                        arguments.Add(ParseTimetag(packet, ref packetIndex));
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
             }
-            return args;
+            return arguments;
         }
 
         /// <summary>
@@ -152,11 +109,17 @@ namespace OpenSoundControl
         private static OscAddress ParseAddress(byte[] packet,
                                                ref int packetIndex)
         {
+            // convert to string
             string packetText = Encoding.ASCII.GetString(packet, packetIndex, packet.Length - packetIndex);
+
+            // cut out the address
             int left = packetText.IndexOf('/');
             int right = packetText.IndexOf(',');
-            packetIndex = right;
             string addrText = packetText.Substring(left, right - left);
+            
+            // move the packet index
+            packetIndex += right;
+            
             return new OscAddress(addrText);
         }
 
@@ -166,8 +129,11 @@ namespace OpenSoundControl
         private static OscTypeTagString ParseTypeTagString(byte[] packet,
                                                            ref int packetIndex)
         {
+            // starts with a comma
             if (packet[packetIndex] != ',')
+            {
                 throw new ArgumentException(String.Format("packet[{0}] != ','", packetIndex));
+            }
 
             return new OscTypeTagString(ParseString(packet, ref packetIndex).ToString());
         }
@@ -178,9 +144,15 @@ namespace OpenSoundControl
         private static OscString ParseString(byte[] packet,
                                              ref int packetIndex)
         {
+            // convert to string
             string packetText = Encoding.ASCII.GetString(packet, packetIndex, packet.Length - packetIndex);
-            var str = new string(packetText.TakeWhile(i => i != '\0').ToArray());
-            packetIndex += PadSize(str.Length);
+
+            // take characters before the null
+            string str = new string(packetText.TakeWhile(i => i != '\0').ToArray());
+
+            // move the packet index by the padded size of the string
+            packetIndex += Osc.PadSize(str.Length);
+
             return new OscString(str);
         }
 
@@ -191,15 +163,19 @@ namespace OpenSoundControl
         {
             int packetIndex = 8; // skip #bundle
 
-            var bundle = new OscBundle
-                             {
-                                 Timetag = ParseTimetag(packet, ref packetIndex)
-                             };
+            OscBundle bundle = new OscBundle
+                                   {
+                                       Timetag = ParseTimetag(packet, ref packetIndex)
+                                   };
 
             do
             {
+                // get element size
                 int size = ParseBundleElementSize(packet, ref packetIndex);
+
+                // get element bytes
                 byte[] element = ParseBundleElement(packet, ref packetIndex, size);
+
                 if (IsBundle(element))
                 {
                     ParseBundle(element);
@@ -210,7 +186,7 @@ namespace OpenSoundControl
                 }
             } while (packetIndex < packet.Length);
 
-            return null;
+            return bundle;
         }
 
         /// <summary>
@@ -220,7 +196,7 @@ namespace OpenSoundControl
                                                       ref int packetIndex)
         {
             ulong tmp64;
-            var tmp64Ptr = (byte*)&tmp64;
+            byte* tmp64Ptr = (byte*)&tmp64;
 
             for (int i = 0; i < 8; i++)
             {
@@ -238,7 +214,7 @@ namespace OpenSoundControl
                                                          ref int packetIndex)
         {
             int tmp32;
-            var tmp32Ptr = (byte*)&tmp32;
+            byte* tmp32Ptr = (byte*)&tmp32;
 
             for (int i = 0; i < 4; i++)
             {
@@ -256,7 +232,7 @@ namespace OpenSoundControl
                                                  ref int packetIndex,
                                                  int size)
         {
-            var buf = new byte[size];
+            byte[] buf = new byte[size];
 
             Array.Copy(packet, packetIndex, buf, 0, size);
             packetIndex += size;

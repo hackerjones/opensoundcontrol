@@ -132,10 +132,10 @@ namespace UnitTests
         }
 
         ///<summary>
-        ///  A test for ToPacketArray
+        ///  A test for ToOscPacketArray
         ///</summary>
         [TestMethod]
-        public void ToPacketArrayTest()
+        public void ToOscPacketArrayTest()
         {
             var target = new OscTypeTagString(new[]
                                                   {
@@ -150,7 +150,7 @@ namespace UnitTests
                                                   });
             var expected = new byte[] { 0x2c, 0x62, 0x46, 0x66, 0x49, 0x69, 0x4e, 0x73, 0x74, 0x54, 0x75, 0x0 };
             byte[] actual;
-            actual = target.ToPacketArray();
+            actual = target.ToOscPacketArray();
             Assert.IsTrue(actual.Length == expected.Length, "Array size not equal");
             for (int i = 0; i < expected.Length; i++)
             {

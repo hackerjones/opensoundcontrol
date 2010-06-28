@@ -6,6 +6,7 @@
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace OpenSoundControl
@@ -45,9 +46,12 @@ namespace OpenSoundControl
                 _value = value;
                 if (_value != null)
                 {
-                    string addr = _value.ToString();
+                    // take characters before the null
+                    string addr = new string(_value.ToString().TakeWhile(i => i != '\0').ToArray());
                     if (!Validate(addr))
+                    {
                         throw new ArgumentException("Address contains invalid characters");
+                    }
                 }
             }
         }
@@ -56,7 +60,9 @@ namespace OpenSoundControl
         {
             // must start with /
             if (!addr.StartsWith("/"))
+            {
                 return false;
+            }
 
             // must not contain any of these characters
             MatchCollection badChars = Regex.Matches(addr, @"[\]\[\}\{\*#,\?\s]");
@@ -96,9 +102,9 @@ namespace OpenSoundControl
         /// <summary>
         ///   Gets the packet array data for the element.
         /// </summary>
-        public byte[] ToPacketArray()
+        public byte[] ToOscPacketArray()
         {
-            return Value.ToPacketArray();
+            return Value.ToOscPacketArray();
         }
 
         #endregion

@@ -83,7 +83,7 @@ namespace OpenSoundControl
             if (deviceAddress.Type != OscIoDeviceAddressType.Udp)
                 throw new ArgumentException("Device address is not UDP");
 
-            byte[] packet = message.ToPacketArray();
+            byte[] packet = message.ToOscPacketArray();
             var eventArgs = new OscIoDeviceEventArgs(message, deviceAddress);
             _udp.BeginSend(packet, packet.Length, deviceAddress.IPEndPoint, OnSend, eventArgs);
         }
@@ -101,7 +101,7 @@ namespace OpenSoundControl
             if (deviceAddress.Type != OscIoDeviceAddressType.Udp)
                 throw new ArgumentException("Device address is not UDP");
 
-            byte[] packet = bundle.ToPacketArray();
+            byte[] packet = bundle.ToOscPacketArray();
             var eventArgs = new OscIoDeviceEventArgs(bundle, deviceAddress);
             _udp.BeginSend(packet, packet.Length, deviceAddress.IPEndPoint, OnSend, eventArgs);
         }
@@ -155,7 +155,7 @@ namespace OpenSoundControl
                 // create an device address for the remote end point
                 var deviceAddress = new OscIoDeviceAddress(OscIoDeviceAddressType.Udp, remoteEP);
 
-                IOscElement element = OscPacket.Parse(datagram);
+                IOscElement element = OscParser.Parse(datagram);
                 OscIoDeviceEventArgs eventArgs = null;
                 switch (element.ElementType)
                 {

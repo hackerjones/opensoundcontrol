@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="IOscElement.cs" />
     <Compile Include="IOscIoDevice.cs" />
+    <Compile Include="Osc.cs" />
     <Compile Include="OscAddress.cs" />
     <Compile Include="OscBlob.cs" />
     <Compile Include="OscBundle.cs" />
@@ -59,7 +60,7 @@
     <Compile Include="OscNull.cs" />
     <Compile Include="OscIoDeviceAddress.cs" />
     <Compile Include="OscIoDeviceEventArgs.cs" />
-    <Compile Include="OscPacket.cs" />
+    <Compile Include="OscParser.cs" />
     <Compile Include="OscString.cs" />
     <Compile Include="OscTimetag.cs" />
     <Compile Include="OscTrue.cs" />

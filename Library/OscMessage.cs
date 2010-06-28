@@ -203,15 +203,15 @@ namespace OpenSoundControl
         /// <summary>
         ///   Gets the packet array data for the element.
         /// </summary>
-        public byte[] ToPacketArray()
+        public byte[] ToOscPacketArray()
         {
             var buffer = new List<byte>();
 
-            buffer.AddRange(Address.ToPacketArray());
-            buffer.AddRange(TypeTagString.ToPacketArray());
+            buffer.AddRange(Address.ToOscPacketArray());
+            buffer.AddRange(TypeTagString.ToOscPacketArray());
             foreach (IOscElement argument in _arguments)
             {
-                buffer.AddRange(argument.ToPacketArray());
+                buffer.AddRange(argument.ToOscPacketArray());
             }
             return buffer.ToArray();
         }

@@ -43,7 +43,7 @@ namespace OpenSoundControl
         /// <summary>
         ///   Gets the packet array data for the element.
         /// </summary>
-        public byte[] ToPacketArray()
+        public byte[] ToOscPacketArray()
         {
             var no = (ulong)IPAddress.HostToNetworkOrder((long)Value);
             unsafe

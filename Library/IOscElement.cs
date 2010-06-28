@@ -25,6 +25,6 @@ namespace OpenSoundControl
         /// <summary>
         ///   Gets the packet array data for the element.
         /// </summary>
-        byte[] ToPacketArray();
+        byte[] ToOscPacketArray();
     }
 }
