@@ -74,10 +74,13 @@ namespace OpenSoundControl
                 switch (elementType)
                 {
                     case OscElementType.Int32:
+                        arguments.Add(ParseInt32(packet, ref packetIndex));
                         break;
                     case OscElementType.UInt32:
+                        arguments.Add(ParseUInt32(packet, ref packetIndex));
                         break;
                     case OscElementType.Float32:
+                        arguments.Add(ParseFloat32(packet, ref packetIndex));
                         break;
                     case OscElementType.String:
                         arguments.Add(ParseString(packet, ref packetIndex));
@@ -104,6 +107,51 @@ namespace OpenSoundControl
                 }
             }
             return arguments;
+        }
+
+        private static unsafe OscFloat32 ParseFloat32(byte[] packet,
+                                                      ref int packetIndex)
+        {
+            float tmp;
+
+            byte* dstPtr = (byte*)(&tmp);
+            fixed (byte* srcPtr = &packet[packetIndex])
+            {
+                Osc.MemoryCopy(dstPtr, srcPtr, 4);
+            }
+            packetIndex += 4;
+
+            return new OscFloat32(IPAddress.NetworkToHostOrder((int)tmp));
+        }
+
+        private static unsafe OscInt32 ParseInt32(byte[] packet,
+                                                  ref int packetIndex)
+        {
+            int tmp;
+
+            byte* dstPtr = (byte*)(&tmp);
+            fixed (byte* srcPtr = &packet[packetIndex])
+            {
+                Osc.MemoryCopy(dstPtr, srcPtr, 4);
+            }
+            packetIndex += 4;
+
+            return new OscInt32(IPAddress.NetworkToHostOrder(tmp));
+        }
+
+        private static unsafe OscUInt32 ParseUInt32(byte[] packet,
+                                                    ref int packetIndex)
+        {
+            uint tmp;
+
+            byte* dstPtr = (byte*)(&tmp);
+            fixed (byte* srcPtr = &packet[packetIndex])
+            {
+                Osc.MemoryCopy(dstPtr, srcPtr, 4);
+            }
+            packetIndex += 4;
+
+            return new OscUInt32((uint)IPAddress.NetworkToHostOrder((int)tmp));
         }
 
         /// <summary>
@@ -216,16 +264,14 @@ namespace OpenSoundControl
         private static unsafe int ParseBundleElementSize(byte[] packet,
                                                          ref int packetIndex)
         {
-            int tmp32;
-            byte* tmp32Ptr = (byte*)&tmp32;
-
-            for (int i = 0; i < 4; i++)
+            int tmp;
+            byte* dstPtr = (byte*)&tmp;
+            fixed (byte* srcPtr = &packet[packetIndex])
             {
-                tmp32Ptr[i] = packet[packetIndex];
-                packetIndex++;
+                Osc.MemoryCopy(dstPtr, srcPtr, 4);
             }
-            tmp32 = IPAddress.NetworkToHostOrder(tmp32);
-            return tmp32;
+            tmp = IPAddress.NetworkToHostOrder(tmp);
+            return tmp;
         }
 
         /// <summary>
