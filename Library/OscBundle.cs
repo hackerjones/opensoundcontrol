@@ -18,6 +18,9 @@ namespace OpenSoundControl
     {
         private List<IOscElement> _elements;
 
+        /// <summary>
+        ///   Creates an empty bundle
+        /// </summary>
         public OscBundle()
         {
             _elements = new List<IOscElement>();
@@ -37,7 +40,7 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        ///   Gets the bundle timetag.
+        ///   Gets or sets the bundle timetag.
         /// </summary>
         public OscTimetag Timetag { get; set; }
 

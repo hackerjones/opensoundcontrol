@@ -68,6 +68,8 @@ namespace OpenSoundControl
         ///   This function is called with the size of an item and will return
         ///   a new number of bytes the item should be for proper alignment.
         /// </remarks>
+        /// <param name = "size">Unpadded size</param>
+        /// <returns>Padded size</returns>
         public static int PadSize(int size)
         {
             int n = size % 4;
@@ -77,6 +79,8 @@ namespace OpenSoundControl
         /// <summary>
         ///   Pads the array to properly align it for transmission inside an OSC packet.
         /// </summary>
+        /// <param name = "buffer">Unpadded array</param>
+        /// <returns>Padded array</returns>
         public static byte[] PadArray(byte[] buffer)
         {
             if (buffer == null)

@@ -124,7 +124,9 @@ namespace OpenSoundControl
 
                 // raise send event
                 if (SendCompleted != null)
+                {
                     SendCompleted(this, eventArgs);
+                }
             }
             catch (Exception e)
             {
@@ -132,7 +134,9 @@ namespace OpenSoundControl
 
                 // raise I/O error
                 if (Error != null)
+                {
                     Error(this, eventArgs);
+                }
             }
         }
 
@@ -165,8 +169,12 @@ namespace OpenSoundControl
                         eventArgs = new OscIoDeviceEventArgs(element as OscBundle, deviceAddress);
                         break;
                 }
+
+                // raise receive event
                 if (ReceiveCompleted != null)
+                {
                     ReceiveCompleted(this, eventArgs);
+                }
             }
             finally
             {
