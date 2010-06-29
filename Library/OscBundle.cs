@@ -6,6 +6,8 @@
  * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
  */
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenSoundControl
 {
@@ -14,6 +16,26 @@ namespace OpenSoundControl
     /// </summary>
     public class OscBundle : IOscElement
     {
+        private List<IOscElement> _elements;
+
+        public OscBundle()
+        {
+            _elements = new List<IOscElement>();
+        }
+
+        public List<IOscElement> Elements
+        {
+            get { return _elements; }
+            set
+            {
+                _elements = value;
+                // filter out elements that are not a bundle or message
+                _elements =
+                    _elements.Where(
+                        i => i.ElementType == OscElementType.Bundle || i.ElementType == OscElementType.Message).ToList();
+            }
+        }
+
         /// <summary>
         ///   Gets the bundle timetag.
         /// </summary>
@@ -22,19 +44,19 @@ namespace OpenSoundControl
         #region Implementation of IOscElement
 
         /// <summary>
-        ///   Gets the element type.
-        /// </summary>
-        public OscElementType ElementType
-        {
-            get { return OscElementType.Bundle; }
-        }
-
-        /// <summary>
         ///   True if the element is also an argument
         /// </summary>
         public bool IsArgument
         {
             get { return false; }
+        }
+
+        /// <summary>
+        ///   Gets the element type.
+        /// </summary>
+        public OscElementType ElementType
+        {
+            get { return OscElementType.Bundle; }
         }
 
         /// <summary>

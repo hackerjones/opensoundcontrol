@@ -1,176 +1,173 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
-  <Class Name="OpenSoundControl.Osc" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscAddress" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAAAQAAAAAAAAAAABAAAAAACAAAAAAAA=</HashCode>
-      <FileName>Osc.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="OpenSoundControl.OscAddress" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="2.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ABAABAAIAACAAAAEAAAAAAAAAAAAAAAAAACgAAAAAAA=</HashCode>
+      <HashCode>ABAABAAKAACAAAAEAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>OscAddress.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="OpenSoundControl.OscBlob" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="4" Y="0.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscBlob" BaseTypeListCollapsed="true">
+    <Position X="15" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAEAAAAAAAAAAAAAAAAAACAAAAAQAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>OscBlob.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="OpenSoundControl.OscBundle" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.75" Y="0.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscBundle" BaseTypeListCollapsed="true">
+    <Position X="28" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAAAAAAAAAAAAAACAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
       <FileName>OscBundle.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="OpenSoundControl.OscFalse" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="7.5" Y="0.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscFalse" BaseTypeListCollapsed="true">
+    <Position X="37.75" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAEAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OscFalse.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OpenSoundControl.OscFloat32" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="0.5" Y="1.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscFloat32" BaseTypeListCollapsed="true">
+    <Position X="44.25" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAEAAAAAAAAAAAAAAAAAACgAAAAAAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAEAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>OscFloat32.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OpenSoundControl.OscImpulse" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="2.25" Y="1.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscImpulse" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAEAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OscImpulse.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="OpenSoundControl.OscInt32" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="4" Y="1.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscInt32">
+    <Position X="18.25" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAEAAAAAAAAAAAAAAAAAACgAAAAAAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAEAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>OscInt32.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OpenSoundControl.OscIoDeviceAddress" Collapsed="true">
-    <Position X="5.75" Y="1.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscIoDeviceAddress">
+    <Position X="31.25" Y="1.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAACQAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>OscIoDeviceAddress.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OpenSoundControl.OscIoDeviceEventArgs" Collapsed="true">
-    <Position X="7.5" Y="1.5" Width="1.5" />
+    <Position X="55.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAIBAMAAACAA=</HashCode>
       <FileName>OscIoDeviceEventArgs.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OpenSoundControl.OscMessage" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="0.5" Y="2.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscMessage">
+    <Position X="47.5" Y="1.75" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>CIAgBAAIAAAAAAAEAQAAAAAACAAAAAACYAiAAAAAIAA=</HashCode>
+      <HashCode>CIAgBAAKAAAAAAAEAQAAAAAACAAAAAACYAgAAAAAIAA=</HashCode>
       <FileName>OscMessage.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OpenSoundControl.OscNull" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="2.25" Y="2.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscNull">
+    <Position X="7" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAEAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OscNull.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OpenSoundControl.OscParser" Collapsed="true">
-    <Position X="4" Y="2.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscString" BaseTypeListCollapsed="true">
+    <Position X="21.5" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>KAAgAAAAAAAQAAAAAAAgAAgAAAAAAQAEAYgAAAAAAAA=</HashCode>
-      <FileName>OscParser.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="OpenSoundControl.OscString" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.75" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAEAAAAAAAAAAAAAAAAAACgAAAAAAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAEAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>OscString.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="OpenSoundControl.OscTimetag" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="7.5" Y="2.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscTimetag">
+    <Position X="34.5" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAAAAAAAAAAAAAAAAAAAACgAAAAAAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>OscTimetag.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OpenSoundControl.OscTrue" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="0.5" Y="3.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscTrue">
+    <Position X="41" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAEAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OscTrue.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OpenSoundControl.OscTypeTagString" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="2.25" Y="3.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscTypeTagString">
+    <Position X="51" Y="1.75" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAAAJAAIgAAAAAAEAAAAAAAAAAAIAAAAYACgAAAAAAA=</HashCode>
+      <HashCode>AAAAJAAKgAAAAAAEAAAAAAAAAAAIAAAAYAAgAAAAAAA=</HashCode>
       <FileName>OscTypeTagString.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="OpenSoundControl.OscUdpIoDevice" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="4" Y="3.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscUdpIoDevice" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="1.75" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAUAQAAAEIAAAIBAIBAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OscUdpIoDevice.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="OpenSoundControl.OscUInt32" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.75" Y="3.5" Width="1.5" />
+  <Class Name="OpenSoundControl.OscUInt32">
+    <Position X="24.75" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAEAAAAAAAAAAAAAAAAAACgAAAAAAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAEAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>OscUInt32.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="26.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="OpenSoundControl.OscPacket" Collapsed="true">
+    <Position X="57.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAAgAAACAAAQAAAQAAAgAAgAAAABAQAEAYgAAAAAAAA=</HashCode>
+      <FileName>OscPacket.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Interface Name="OpenSoundControl.IOscElement" Collapsed="true">
-    <Position X="0.5" Y="4.75" Width="1.5" />
+    <Position X="55.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAAABAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IOscElement.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OpenSoundControl.IOscIoDevice" Collapsed="true">
-    <Position X="2.25" Y="4.75" Width="1.5" />
+    <Position X="57.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAQAAAEAAAAIAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IOscIoDevice.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="OpenSoundControl.OscElementType" Collapsed="true">
-    <Position X="0.5" Y="5.75" Width="1.5" />
+    <Position X="55.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AkABAAAAAACAAAAAQQAAAAAAAAAACACCEIoAIAAAAAA=</HashCode>
       <FileName>OscElementType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="OpenSoundControl.OscIoDeviceAddressType" Collapsed="true">
-    <Position X="2.25" Y="5.75" Width="1.5" />
+    <Position X="57.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OscIoDeviceAddressType.cs</FileName>

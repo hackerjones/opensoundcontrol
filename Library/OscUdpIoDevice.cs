@@ -8,7 +8,6 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 
 namespace OpenSoundControl
 {
@@ -149,8 +148,8 @@ namespace OpenSoundControl
                 // get the datagram
                 var remoteEP = new IPEndPoint(IPAddress.Any, 0);
                 byte[] datagram = _udp.EndReceive(ar, ref remoteEP);
-                Console.WriteLine("OnReceive");
-                Console.WriteLine(Encoding.ASCII.GetString(datagram));
+//                Console.WriteLine("OnReceive");
+//                Console.WriteLine(Encoding.ASCII.GetString(datagram));
 
                 // create an device address for the remote end point
                 var deviceAddress = new OscIoDeviceAddress(OscIoDeviceAddressType.Udp, remoteEP);

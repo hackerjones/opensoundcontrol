@@ -58,6 +58,9 @@ namespace OpenSoundControl
             return msg;
         }
 
+        /// <summary>
+        ///   Parses arguments from a message packet.
+        /// </summary>
         private static List<IOscElement> ParseArguments(byte[] packet,
                                                         ref int packetIndex)
         {
@@ -116,10 +119,10 @@ namespace OpenSoundControl
             int left = packetText.IndexOf('/');
             int right = packetText.IndexOf(',');
             string addrText = packetText.Substring(left, right - left);
-            
+
             // move the packet index
             packetIndex += right;
-            
+
             return new OscAddress(addrText);
         }
 
@@ -178,11 +181,11 @@ namespace OpenSoundControl
 
                 if (IsBundle(element))
                 {
-                    ParseBundle(element);
+                    bundle.Elements.Add(ParseBundle(element));
                 }
                 else
                 {
-                    ParseMessage(element);
+                    bundle.Elements.Add(ParseMessage(element));
                 }
             } while (packetIndex < packet.Length);
 
