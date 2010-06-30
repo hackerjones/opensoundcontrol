@@ -1,10 +1,8 @@
-﻿/*
- * Copyright (C) Mark Alan Jones 2010
- * This code is published under the Microsoft Public License (Ms-Pl)
- * A copy of the Ms-Pl license is included with the source and 
- * binary distributions or online at
- * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
- */
+﻿// Copyright (C) Mark Alan Jones 2010
+// This code is published under the Microsoft Public License (Ms-Pl)
+// A copy of the Ms-Pl license is included with the source and 
+// binary distributions or online at
+// http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
 using System;
 using System.Text;
 
@@ -79,7 +77,7 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        ///   Compares the value of two OscStrings and determines if they are equal
+        ///   Compares the value of two OscString and determines if they are equal
         /// </summary>
         /// <param name = "s1">string one</param>
         /// <param name = "s2">string two</param>
@@ -91,7 +89,7 @@ namespace OpenSoundControl
         }
 
         /// <summary>
-        ///   Compares the value of two OscStrings and determines if they are not equal
+        ///   Compares the value of two OscString and determines if they are not equal
         /// </summary>
         /// <param name = "s1">string one</param>
         /// <param name = "s2">string two</param>
@@ -99,7 +97,7 @@ namespace OpenSoundControl
         public static bool operator !=(OscString s1,
                                        OscString s2)
         {
-            return (s1.Value != s2.Value);
+            return !(s1 == s2);
         }
 
         #region Implementation of IOscElement

@@ -1,10 +1,8 @@
-﻿/*
- * Copyright (C) Mark Alan Jones 2010
- * This code is published under the Microsoft Public License (Ms-Pl)
- * A copy of the Ms-Pl license is included with the source and 
- * binary distributions or online at
- * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
- */
+﻿// Copyright (C) Mark Alan Jones 2010
+// This code is published under the Microsoft Public License (Ms-Pl)
+// A copy of the Ms-Pl license is included with the source and 
+// binary distributions or online at
+// http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -182,6 +180,68 @@ namespace OpenSoundControl
             return sb.ToString();
         }
 
+        /// <summary>
+        ///   Serves as a hash function for a particular type.
+        /// </summary>
+        /// <returns>
+        ///   A hash code for the current <see cref = "T:System.Object" />.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        public override int GetHashCode()
+        {
+            int hash = Address.GetHashCode();
+            hash ^= TypeTagString.GetHashCode();
+            Arguments.ForEach(i => hash ^= i.GetHashCode());
+            return hash;
+        }
+
+        /// <summary>
+        ///   Determines whether the specified <see cref = "T:System.Object" /> is equal to the current <see cref = "T:System.Object" />.
+        /// </summary>
+        /// <returns>
+        ///   true if the specified <see cref = "T:System.Object" /> is equal to the current <see cref = "T:System.Object" />; otherwise, false.
+        /// </returns>
+        /// <param name = "obj">The <see cref = "T:System.Object" /> to compare with the current <see cref = "T:System.Object" />. </param>
+        /// <filterpriority>2</filterpriority>
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            OscMessage other = (OscMessage)obj;
+            return (this == other);
+        }
+
+        /// <summary>
+        ///   Compares the value of two OscMessage and determines if they are equal
+        /// </summary>
+        /// <param name = "m1">message one</param>
+        /// <param name = "m2">message two</param>
+        /// <returns></returns>
+        public static bool operator ==(OscMessage m1,
+                                       OscMessage m2)
+        {
+            if (m1.Address != m2.Address || m1.TypeTagString != m2.TypeTagString)
+                return false;
+
+            return !m1.Arguments.Where((t,
+                                        i) => !t.Equals(m2.Arguments[i])).Any();
+        }
+
+        /// <summary>
+        ///   Compares the value of two OscMessage and determines if they are not equal
+        /// </summary>
+        /// <param name = "m1">message one</param>
+        /// <param name = "m2">message two</param>
+        /// <returns></returns>
+        public static bool operator !=(OscMessage m1,
+                                       OscMessage m2)
+        {
+            return !(m1 == m2);
+        }
+
         #region Implementation of IOscElement
 
         /// <summary>
@@ -205,14 +265,11 @@ namespace OpenSoundControl
         /// </summary>
         public byte[] ToOscPacketArray()
         {
-            var buffer = new List<byte>();
+            List<byte> buffer = new List<byte>();
 
             buffer.AddRange(Address.ToOscPacketArray());
             buffer.AddRange(TypeTagString.ToOscPacketArray());
-            foreach (IOscElement argument in _arguments)
-            {
-                buffer.AddRange(argument.ToOscPacketArray());
-            }
+            _arguments.ForEach(i => buffer.AddRange(i.ToOscPacketArray()));
             return buffer.ToArray();
         }
 

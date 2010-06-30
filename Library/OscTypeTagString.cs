@@ -1,10 +1,9 @@
-﻿/*
- * Copyright (C) Mark Alan Jones 2010
- * This code is published under the Microsoft Public License (Ms-Pl)
- * A copy of the Ms-Pl license is included with the source and 
- * binary distributions or online at
- * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
- */
+﻿// Copyright (C) Mark Alan Jones 2010
+// This code is published under the Microsoft Public License (Ms-Pl)
+// A copy of the Ms-Pl license is included with the source and 
+// binary distributions or online at
+// http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -121,6 +120,61 @@ namespace OpenSoundControl
                 sb.Append(_typeToChar[argument]);
             }
             return sb.ToString();
+        }
+
+        /// <summary>
+        ///   Serves as a hash function for a particular type.
+        /// </summary>
+        /// <returns>
+        ///   A hash code for the current <see cref = "T:System.Object" />.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        /// <summary>
+        ///   Determines whether the specified <see cref = "T:System.Object" /> is equal to the current <see cref = "T:System.Object" />.
+        /// </summary>
+        /// <returns>
+        ///   true if the specified <see cref = "T:System.Object" /> is equal to the current <see cref = "T:System.Object" />; otherwise, false.
+        /// </returns>
+        /// <param name = "obj">The <see cref = "T:System.Object" /> to compare with the current <see cref = "T:System.Object" />. </param>
+        /// <filterpriority>2</filterpriority>
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            OscTypeTagString other = (OscTypeTagString)obj;
+            return (this == other);
+        }
+
+        /// <summary>
+        ///   Compares the value of two OscTypeTagString and determines if they are equal
+        /// </summary>
+        /// <param name = "s1">string one</param>
+        /// <param name = "s2">string two</param>
+        /// <returns></returns>
+        public static bool operator ==(OscTypeTagString s1,
+                                       OscTypeTagString s2)
+        {
+            return (s1.Value == s2.Value);
+        }
+
+        /// <summary>
+        ///   Compares the value of two OscTypeTagString and determines if they are not equal
+        /// </summary>
+        /// <param name = "s1">string one</param>
+        /// <param name = "s2">string two</param>
+        /// <returns></returns>
+        public static bool operator !=(OscTypeTagString s1,
+                                       OscTypeTagString s2)
+        {
+            return !(s1 == s2);
         }
 
         #region Implementation of IOscElement
