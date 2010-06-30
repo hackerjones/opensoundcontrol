@@ -47,6 +47,61 @@ namespace OpenSoundControl
             return Value;
         }
 
+        /// <summary>
+        ///   Serves as a hash function for a particular type.
+        /// </summary>
+        /// <returns>
+        ///   A hash code for the current <see cref = "T:System.Object" />.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        /// <summary>
+        ///   Determines whether the specified <see cref = "T:System.Object" /> is equal to the current <see cref = "T:System.Object" />.
+        /// </summary>
+        /// <returns>
+        ///   true if the specified <see cref = "T:System.Object" /> is equal to the current <see cref = "T:System.Object" />; otherwise, false.
+        /// </returns>
+        /// <param name = "obj">The <see cref = "T:System.Object" /> to compare with the current <see cref = "T:System.Object" />. </param>
+        /// <filterpriority>2</filterpriority>
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            OscString other = (OscString)obj;
+            return (this == other);
+        }
+
+        /// <summary>
+        ///   Compares the value of two OscStrings and determines if they are equal
+        /// </summary>
+        /// <param name = "s1">string one</param>
+        /// <param name = "s2">string two</param>
+        /// <returns></returns>
+        public static bool operator ==(OscString s1,
+                                       OscString s2)
+        {
+            return (s1.Value == s2.Value);
+        }
+
+        /// <summary>
+        ///   Compares the value of two OscStrings and determines if they are not equal
+        /// </summary>
+        /// <param name = "s1">string one</param>
+        /// <param name = "s2">string two</param>
+        /// <returns>True if the strings are not equal</returns>
+        public static bool operator !=(OscString s1,
+                                       OscString s2)
+        {
+            return (s1.Value != s2.Value);
+        }
+
         #region Implementation of IOscElement
 
         /// <summary>

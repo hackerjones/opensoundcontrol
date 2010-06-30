@@ -19,7 +19,7 @@
   <Class Name="OpenSoundControl.OscBundle" BaseTypeListCollapsed="true">
     <Position X="28" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIBAAAAAAAAAAQAAAAAAAACAAAAACAAAAAAAA=</HashCode>
+      <HashCode>AAAABAAIBAAAAAAEAAAQAAAAAAAACAAAAACAAAAAAAA=</HashCode>
       <FileName>OscBundle.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -89,7 +89,7 @@
   <Class Name="OpenSoundControl.OscString" BaseTypeListCollapsed="true">
     <Position X="21.5" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAAAAAAAEAAAAAAAAAAAAAAAAAACgAAAAAAA=</HashCode>
+      <HashCode>AAAABAAIAAAAAAAEgAAAAAAAAAAAAIAAAACgAAAAAiA=</HashCode>
       <FileName>OscString.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -141,33 +141,33 @@
   <Class Name="OpenSoundControl.OscParser">
     <Position X="58.5" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>KAAgAAAAAAAQAAAAAAAgAAgAAAAAAQAEAYgAAAAAAAA=</HashCode>
+      <HashCode>KAAgIAAAAAAQAAIAAAAgAAgAAAAAAQAEAYgAAAAACAA=</HashCode>
       <FileName>OscParser.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="OpenSoundControl.IOscElement">
-    <Position X="55.5" Y="3.75" Width="2.5" />
+    <Position X="55.5" Y="4.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAIAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
       <FileName>IOscElement.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OpenSoundControl.IOscIoDevice">
-    <Position X="58.25" Y="3.75" Width="4" />
+    <Position X="58.25" Y="4.5" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAQAAAEAAAAIAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IOscIoDevice.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="OpenSoundControl.OscElementType">
-    <Position X="55.5" Y="6" Width="1.5" />
+    <Position X="55.5" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AkABAAAAAACAAAAAQQAAAAAAAAAACACCEIoAIAAAAAA=</HashCode>
       <FileName>OscElementType.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Enum Name="OpenSoundControl.OscIoDeviceAddressType">
-    <Position X="58.5" Y="6" Width="2" />
+    <Position X="57.25" Y="7" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>OscIoDeviceAddressType.cs</FileName>
