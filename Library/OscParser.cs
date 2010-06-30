@@ -114,14 +114,18 @@ namespace OpenSoundControl
         {
             float tmp;
 
-            byte* dstPtr = (byte*)(&tmp);
+            // copy the float from the array
             fixed (byte* srcPtr = &packet[packetIndex])
             {
+                byte* dstPtr = (byte*)(&tmp);
                 Osc.MemoryCopy(dstPtr, srcPtr, 4);
             }
+
+            // move the packet index
             packetIndex += 4;
 
-            return new OscFloat32(IPAddress.NetworkToHostOrder((int)tmp));
+            tmp = IPAddress.NetworkToHostOrder((int)tmp);
+            return new OscFloat32(tmp);
         }
 
         private static unsafe OscInt32 ParseInt32(byte[] packet,
@@ -129,14 +133,18 @@ namespace OpenSoundControl
         {
             int tmp;
 
-            byte* dstPtr = (byte*)(&tmp);
+            // copy the integer from the array
             fixed (byte* srcPtr = &packet[packetIndex])
             {
+                byte* dstPtr = (byte*)(&tmp);
                 Osc.MemoryCopy(dstPtr, srcPtr, 4);
             }
+
+            // move the packet index
             packetIndex += 4;
 
-            return new OscInt32(IPAddress.NetworkToHostOrder(tmp));
+            tmp = IPAddress.NetworkToHostOrder(tmp);
+            return new OscInt32(tmp);
         }
 
         private static unsafe OscUInt32 ParseUInt32(byte[] packet,
@@ -144,14 +152,18 @@ namespace OpenSoundControl
         {
             uint tmp;
 
-            byte* dstPtr = (byte*)(&tmp);
+            // copy the integer from the array
             fixed (byte* srcPtr = &packet[packetIndex])
             {
+                byte* dstPtr = (byte*)(&tmp);
                 Osc.MemoryCopy(dstPtr, srcPtr, 4);
             }
+
+            // move the packet index
             packetIndex += 4;
 
-            return new OscUInt32((uint)IPAddress.NetworkToHostOrder((int)tmp));
+            tmp = (uint)IPAddress.NetworkToHostOrder((int)tmp);
+            return new OscUInt32(tmp);
         }
 
         /// <summary>
@@ -171,7 +183,7 @@ namespace OpenSoundControl
             // move the packet index
             packetIndex += right;
 
-            return new OscAddress(addrText);
+            return new OscAddress(new string(addrText.TakeWhile(i => i != '\0').ToArray()));
         }
 
         /// <summary>
@@ -265,11 +277,17 @@ namespace OpenSoundControl
                                                          ref int packetIndex)
         {
             int tmp;
-            byte* dstPtr = (byte*)&tmp;
+
+            // copy the integer from the array
             fixed (byte* srcPtr = &packet[packetIndex])
             {
+                byte* dstPtr = (byte*)&tmp;
                 Osc.MemoryCopy(dstPtr, srcPtr, 4);
             }
+
+            // move the packet index
+            packetIndex += 4;
+
             tmp = IPAddress.NetworkToHostOrder(tmp);
             return tmp;
         }

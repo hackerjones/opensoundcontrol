@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace OpenSoundControl
 {
@@ -71,5 +72,16 @@ namespace OpenSoundControl
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var i in _elements)
+            {
+                sb.Append(i.ToString());
+                sb.Append('\n');
+            }
+            return sb.ToString();
+        }
     }
 }

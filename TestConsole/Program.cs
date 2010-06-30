@@ -11,8 +11,8 @@ namespace TestConsole
         {
             var udp = new OscUdpIoDevice(10000);
             var addr = new OscIoDeviceAddress(OscIoDeviceAddressType.Udp,
-                                              new IPEndPoint(IPAddress.Parse("192.168.0.100"), 10000));
-            var p1 = new OscMessage("/");
+                                              new IPEndPoint(IPAddress.Parse("192.168.0.103"), 10000));
+            var p1 = new OscMessage("/servo/0");
             udp.SendCompleted += SendCompleted;
             udp.ReceiveCompleted += ReceiveCompleted;
             udp.Send(p1, addr);
@@ -33,8 +33,15 @@ namespace TestConsole
                                              OscIoDeviceEventArgs args)
         {
             Console.WriteLine("Receive from {0}", args.DeviceAddress.IPEndPoint);
-            Console.WriteLine("HasBundle {0}", args.HasBundle);
-            Console.WriteLine("HasMessage {0}", args.HasMessage);
+            if (args.HasBundle)
+            {
+                Console.WriteLine(args.Bundle.ToString());                
+            }
+            
+            if (args.HasMessage)
+            {
+                
+            }
         }
     }
 }
