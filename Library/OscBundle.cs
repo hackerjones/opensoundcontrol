@@ -1,10 +1,8 @@
-﻿/*
- * Copyright (C) Mark Alan Jones 2010
- * This code is published under the Microsoft Public License (Ms-Pl)
- * A copy of the Ms-Pl license is included with the source and 
- * binary distributions or online at
- * http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
- */
+﻿// Copyright (C) Mark Alan Jones 2010
+// This code is published under the Microsoft Public License (Ms-Pl)
+// A copy of the Ms-Pl license is included with the source and 
+// binary distributions or online at
+// http://www.microsoft.com/opensource/licenses.mspx#Ms-PL
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +25,10 @@ namespace OpenSoundControl
             _elements = new List<IOscElement>();
         }
 
+
+        /// <summary>
+        ///   Gets or sets the list of elements contained in the bundle.
+        /// </summary>
         public List<IOscElement> Elements
         {
             get { return _elements; }
@@ -73,14 +75,17 @@ namespace OpenSoundControl
 
         #endregion
 
+        /// <summary>
+        ///   Returns a <see cref = "T:System.String" /> that represents the current <see cref = "T:System.Object" />.
+        /// </summary>
+        /// <returns>
+        ///   A <see cref = "T:System.String" /> that represents the current <see cref = "T:System.Object" />.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (var i in _elements)
-            {
-                sb.Append(i.ToString());
-                sb.Append('\n');
-            }
+            _elements.ForEach(i => sb.AppendLine(i.ToString()));
             return sb.ToString();
         }
     }
