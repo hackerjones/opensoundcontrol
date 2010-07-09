@@ -5,14 +5,24 @@ Open Sound Control Library Release Log
 This Open Sound Control Library project uses the Microsoft 
 [major].[minor].[build].[revision] format for version information.
 
+Source code can be obtained at http://github.com/markalanj/OpenSoundControl
+
 You can submit bug reports directly to the author at markalanj@gmail.com
-or use the github project issue tracker page at 
+or use the github project page issue tracker at 
 http://github.com/markalanj/OpenSoundControl/issues.
 
-July 7, 2010 
-=============
-Version 0.1.1.0
+=====================
+Current Requirements
+=====================
+
+Microsoft .NET 4 Runtime
+
+================
+Version 0.1.1.0 
+================
+
+Release Date: July 7, 2010 
+Git Tag:      rel-0.1.1.0
 
 Initial release. This version should be considered beta at best. Much
 real world testing needs to be performed and improvements made. 
-
