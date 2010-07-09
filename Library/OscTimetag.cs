@@ -9,16 +9,60 @@ using System.Net;
 namespace OpenSoundControl
 {
     /// <summary>
-    ///   Encapsulates an timetag
+    ///   Encapsulates an time tag
     /// </summary>
     public class OscTimetag : IOscElement
     {
+        private static readonly DateTime Epoch = new DateTime(1900, 1, 1);
+
         /// <summary>
         ///   Creates a time tag from the value in NTP format
         /// </summary>
         public OscTimetag(ulong value)
         {
             Value = value;
+        }
+
+        ///<summary>
+        ///  Creates a time tag from a DateTime object
+        ///</summary>
+        ///<param name = "dt">DateTime</param>
+        ///<exception cref = "ArgumentOutOfRangeException"></exception>
+        public OscTimetag(DateTime dt)
+        {
+            DateTime = dt;
+        }
+
+        /// <summary>
+        ///   Time tag in NTP format.
+        /// </summary>
+        public ulong Value { get; set; }
+
+
+        ///<summary>
+        ///  Gets or sets the time tag as a DateTime object
+        ///</summary>
+        ///<exception cref = "ArgumentOutOfRangeException"></exception>
+        public DateTime DateTime
+        {
+            get { return Epoch.Add(TimeSpan.FromSeconds(Value & 0xffffffff)); }
+
+            set
+            {
+                if (value < Epoch)
+                    throw new ArgumentOutOfRangeException();
+
+                TimeSpan diff = value.Subtract(Epoch);
+                Value = (uint)diff.TotalSeconds;
+            }
+        }
+
+        ///<summary>
+        /// Returns a time tag that represents the immediately case.
+        ///</summary>
+        public static OscTimetag Immediately
+        {
+            get { return new OscTimetag(1); }
         }
 
         #region Implementation of IOscElement
@@ -44,25 +88,19 @@ namespace OpenSoundControl
         /// </summary>
         public byte[] ToOscPacketArray()
         {
-            var no = (ulong)IPAddress.HostToNetworkOrder((long)Value);
+            ulong no = (ulong)IPAddress.HostToNetworkOrder((long)Value);
+            byte[] buffer = new byte[8];
             unsafe
             {
-                var buffer = new byte[8];
-                var ptr = (byte*)&no;
-
-                for (int i = 0; i < 8; i++)
+                fixed (byte* dstPtr = buffer)
                 {
-                    buffer[i] = ptr[i];
+                    byte* srcPtr = (byte*)&no;
+                    Osc.MemoryCopy(dstPtr, srcPtr, 8);
                 }
-                return buffer;
             }
+            return buffer;
         }
 
         #endregion
-
-        /// <summary>
-        ///   Time tag in NTP format.
-        /// </summary>
-        public ulong Value { get; set; }
     }
 }
