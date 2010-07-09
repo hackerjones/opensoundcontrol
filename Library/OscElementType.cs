@@ -65,7 +65,7 @@ namespace OpenSoundControl
         /// </summary>
         Impulse,
         /// <summary>
-        ///   Timetag
+        ///   Time tag
         /// </summary>
         Timetag
     }

@@ -96,7 +96,9 @@ namespace OpenSoundControl
             var list = new List<IOscElement>();
             MatchCollection matches = Regex.Matches(value, @"\s+(\w+)");
             foreach (string input in
-                from Match match in matches where match.Captures.Count > 0 select match.Captures[0].ToString())
+                from Match match in matches
+                where match.Captures.Count > 0
+                select match.Captures[0].ToString())
             {
                 float f;
                 if (TryParseFloat32(input, out f))
@@ -140,7 +142,7 @@ namespace OpenSoundControl
         private static bool TryParseInt32(string input,
                                           out int output)
         {
-            MatchCollection matches = Regex.Matches(input, @"([-]\d+)");
+            MatchCollection matches = Regex.Matches(input, @"([-]*\d+)");
             if (matches.Count > 0 && matches[0].Captures.Count > 0)
             {
                 return int.TryParse(matches[0].Captures[0].ToString(), out output);
@@ -205,13 +207,17 @@ namespace OpenSoundControl
         /// <filterpriority>2</filterpriority>
         public override bool Equals(object obj)
         {
-            if (obj == null || GetType() != obj.GetType())
+            if (obj != null && obj is OscMessage)
             {
-                return false;
-            }
+                OscMessage other = obj as OscMessage;
 
-            OscMessage other = (OscMessage)obj;
-            return (this == other);
+                if (Address != other.Address || TypeTagString != other.TypeTagString)
+                    return false;
+
+                return !Arguments.Where((t,
+                                         i) => !t.Equals(other.Arguments[i])).Any();
+            }
+            return false;
         }
 
         /// <summary>
@@ -223,11 +229,13 @@ namespace OpenSoundControl
         public static bool operator ==(OscMessage m1,
                                        OscMessage m2)
         {
-            if (m1.Address != m2.Address || m1.TypeTagString != m2.TypeTagString)
-                return false;
+            if (ReferenceEquals(m1, null))
+                throw new ArgumentNullException("m1");
 
-            return !m1.Arguments.Where((t,
-                                        i) => !t.Equals(m2.Arguments[i])).Any();
+            if (ReferenceEquals(m2, null))
+                throw new ArgumentNullException("m2");
+
+            return m1.Equals(m2);
         }
 
         /// <summary>
@@ -239,7 +247,13 @@ namespace OpenSoundControl
         public static bool operator !=(OscMessage m1,
                                        OscMessage m2)
         {
-            return !(m1 == m2);
+            if (ReferenceEquals(m1, null))
+                throw new ArgumentNullException("m1");
+
+            if (ReferenceEquals(m2, null))
+                throw new ArgumentNullException("m2");
+
+            return !m1.Equals(m2);
         }
 
         #region Implementation of IOscElement

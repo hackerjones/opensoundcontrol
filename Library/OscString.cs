@@ -67,13 +67,12 @@ namespace OpenSoundControl
         /// <filterpriority>2</filterpriority>
         public override bool Equals(object obj)
         {
-            if (obj == null || GetType() != obj.GetType())
+            if (obj != null && obj is OscString)
             {
-                return false;
+                OscString other = obj as OscString;
+                return Value == other.Value;
             }
-
-            OscString other = (OscString)obj;
-            return (this == other);
+            return false;
         }
 
         /// <summary>
@@ -85,7 +84,7 @@ namespace OpenSoundControl
         public static bool operator ==(OscString s1,
                                        OscString s2)
         {
-            return (s1.Value == s2.Value);
+            return s1.Equals(s2);
         }
 
         /// <summary>
@@ -97,7 +96,7 @@ namespace OpenSoundControl
         public static bool operator !=(OscString s1,
                                        OscString s2)
         {
-            return !(s1 == s2);
+            return !s1.Equals(s2);
         }
 
         #region Implementation of IOscElement

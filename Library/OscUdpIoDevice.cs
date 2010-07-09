@@ -22,7 +22,7 @@ namespace OpenSoundControl
         /// </summary>
         public OscUdpIoDevice(int localPort)
         {
-            _udp = new UdpClient(localPort) { EnableBroadcast = true };
+            _udp = new UdpClient(localPort) {EnableBroadcast = true};
             BeginReceive();
         }
 
@@ -75,8 +75,12 @@ namespace OpenSoundControl
             OscIoDeviceAddress deviceAddress
             )
         {
-            if (message == null) throw new ArgumentNullException("message");
-            if (deviceAddress == null) throw new ArgumentNullException("deviceAddress");
+            if (ReferenceEquals(message, null))
+                throw new ArgumentNullException("message");
+
+            if (ReferenceEquals(message, null))
+                throw new ArgumentNullException("deviceAddress");
+
             if (deviceAddress.Type != OscIoDeviceAddressType.Udp)
                 throw new ArgumentException("Device address is not UDP");
 
@@ -93,8 +97,12 @@ namespace OpenSoundControl
             OscIoDeviceAddress deviceAddress
             )
         {
-            if (bundle == null) throw new ArgumentNullException("bundle");
-            if (deviceAddress == null) throw new ArgumentNullException("deviceAddress");
+            if (bundle == null)
+                throw new ArgumentNullException("bundle");
+
+            if (deviceAddress == null)
+                throw new ArgumentNullException("deviceAddress");
+
             if (deviceAddress.Type != OscIoDeviceAddressType.Udp)
                 throw new ArgumentException("Device address is not UDP");
 

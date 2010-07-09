@@ -42,7 +42,7 @@ namespace OpenSoundControl
             set
             {
                 _value = value;
-                if (_value != null)
+                if (!ReferenceEquals(_value, null))
                 {
                     // take characters before the null
                     string addr = new string(_value.ToString().TakeWhile(i => i != '\0').ToArray());
@@ -101,12 +101,12 @@ namespace OpenSoundControl
         /// <filterpriority>2</filterpriority>
         public override bool Equals(object obj)
         {
-            if (obj == null || GetType() != obj.GetType())
+            if (obj != null && obj is OscAddress)
             {
-                return false;
+                OscAddress other = obj as OscAddress;
+                return Value == other.Value;
             }
-            OscAddress other = (OscAddress)obj;
-            return (this == other);
+            return false;
         }
 
         /// <summary>
@@ -118,7 +118,13 @@ namespace OpenSoundControl
         public static bool operator ==(OscAddress a1,
                                        OscAddress a2)
         {
-            return (a1.Value == a2.Value);
+            if (ReferenceEquals(a1, null))
+                throw new ArgumentNullException("a1");
+
+            if (ReferenceEquals(a2, null))
+                throw new ArgumentNullException("a2");
+
+            return a1.Equals(a2);
         }
 
         /// <summary>
@@ -130,7 +136,13 @@ namespace OpenSoundControl
         public static bool operator !=(OscAddress a1,
                                        OscAddress a2)
         {
-            return !(a1 == a2);
+            if (ReferenceEquals(a1, null))
+                throw new ArgumentNullException("a1");
+
+            if (ReferenceEquals(a2, null))
+                throw new ArgumentNullException("a2");
+
+            return !a1.Equals(a2);
         }
 
         #region Implementation of IOscElement

@@ -24,30 +24,30 @@ namespace OpenSoundControl
         {
             _charToType = new Dictionary<char, OscElementType>
                               {
-                                  { 'i', OscElementType.Int32 },
-                                  { 'u', OscElementType.UInt32 },
-                                  { 'f', OscElementType.Float32 },
-                                  { 's', OscElementType.String },
-                                  { 'b', OscElementType.Blob },
-                                  { 'T', OscElementType.True },
-                                  { 'F', OscElementType.False },
-                                  { 'N', OscElementType.Null },
-                                  { 'I', OscElementType.Impulse },
-                                  { 't', OscElementType.Timetag }
+                                  {'i', OscElementType.Int32},
+                                  {'u', OscElementType.UInt32},
+                                  {'f', OscElementType.Float32},
+                                  {'s', OscElementType.String},
+                                  {'b', OscElementType.Blob},
+                                  {'T', OscElementType.True},
+                                  {'F', OscElementType.False},
+                                  {'N', OscElementType.Null},
+                                  {'I', OscElementType.Impulse},
+                                  {'t', OscElementType.Timetag}
                               };
 
             _typeToChar = new Dictionary<OscElementType, char>
                               {
-                                  { OscElementType.Int32, 'i' },
-                                  { OscElementType.UInt32, 'u' },
-                                  { OscElementType.Float32, 'f' },
-                                  { OscElementType.String, 's' },
-                                  { OscElementType.Blob, 'b' },
-                                  { OscElementType.True, 'T' },
-                                  { OscElementType.False, 'F' },
-                                  { OscElementType.Null, 'N' },
-                                  { OscElementType.Impulse, 'I' },
-                                  { OscElementType.Timetag, 't' }
+                                  {OscElementType.Int32, 'i'},
+                                  {OscElementType.UInt32, 'u'},
+                                  {OscElementType.Float32, 'f'},
+                                  {OscElementType.String, 's'},
+                                  {OscElementType.Blob, 'b'},
+                                  {OscElementType.True, 'T'},
+                                  {OscElementType.False, 'F'},
+                                  {OscElementType.Null, 'N'},
+                                  {OscElementType.Impulse, 'I'},
+                                  {OscElementType.Timetag, 't'}
                               };
         }
 
@@ -144,13 +144,12 @@ namespace OpenSoundControl
         /// <filterpriority>2</filterpriority>
         public override bool Equals(object obj)
         {
-            if (obj == null || GetType() != obj.GetType())
+            if (obj != null && obj is OscTypeTagString)
             {
-                return false;
+                OscTypeTagString other = obj as OscTypeTagString;
+                return Value == other.Value;
             }
-
-            OscTypeTagString other = (OscTypeTagString)obj;
-            return (this == other);
+            return false;
         }
 
         /// <summary>
@@ -162,7 +161,7 @@ namespace OpenSoundControl
         public static bool operator ==(OscTypeTagString s1,
                                        OscTypeTagString s2)
         {
-            return (s1.Value == s2.Value);
+            return s1.Equals(s2);
         }
 
         /// <summary>
@@ -174,7 +173,7 @@ namespace OpenSoundControl
         public static bool operator !=(OscTypeTagString s1,
                                        OscTypeTagString s2)
         {
-            return !(s1 == s2);
+            return !s1.Equals(s2);
         }
 
         #region Implementation of IOscElement

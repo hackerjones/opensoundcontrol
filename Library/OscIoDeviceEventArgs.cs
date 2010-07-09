@@ -59,25 +59,25 @@ namespace OpenSoundControl
         /// <summary>
         ///   Gets if the event contains a bundle
         /// </summary>
-        public bool HasBundle
+        public bool ContainsBundle
         {
-            get { return Bundle != null; }
+            get { return !ReferenceEquals(Bundle, null); }
         }
 
         /// <summary>
         ///   Gets if the event contains a message
         /// </summary>
-        public bool HasMessage
+        public bool ContainsMessage
         {
-            get { return Message != null; }
+            get { return !ReferenceEquals(Message, null); }
         }
 
         /// <summary>
         ///   Gets if the event contains an exception
         /// </summary>
-        public bool HasException
+        public bool ContainsException
         {
-            get { return Exception != null; }
+            get { return !ReferenceEquals(Exception, null); }
         }
     }
 }

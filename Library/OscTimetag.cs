@@ -58,7 +58,7 @@ namespace OpenSoundControl
         }
 
         ///<summary>
-        /// Returns a time tag that represents the immediately case.
+        ///  Returns a time tag that represents the immediately case.
         ///</summary>
         public static OscTimetag Immediately
         {

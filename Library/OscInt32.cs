@@ -41,6 +41,75 @@ namespace OpenSoundControl
             return Convert.ToString(Value);
         }
 
+        /// <summary>
+        ///   Determines whether the specified <see cref = "T:System.Object" /> is equal to the current <see cref = "T:System.Object" />.
+        /// </summary>
+        /// <returns>
+        ///   true if the specified <see cref = "T:System.Object" /> is equal to the current <see cref = "T:System.Object" />; otherwise, false.
+        /// </returns>
+        /// <param name = "obj">The <see cref = "T:System.Object" /> to compare with the current <see cref = "T:System.Object" />. </param>
+        /// <filterpriority>2</filterpriority>
+        public override bool Equals(object obj)
+        {
+            if (obj != null && obj is OscInt32)
+            {
+                OscInt32 other = obj as OscInt32;
+                return Value == other.Value;
+            }
+            return false;
+        }
+
+        /// <summary>
+        ///   Serves as a hash function for a particular type.
+        /// </summary>
+        /// <returns>
+        ///   A hash code for the current <see cref = "T:System.Object" />.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        public override int GetHashCode()
+        {
+            return Value;
+        }
+
+
+        ///<summary>
+        ///  Compares the value of two OscInt32 and determines if they are equal
+        ///</summary>
+        ///<param name = "i1">integer one</param>
+        ///<param name = "i2">integer two</param>
+        ///<returns></returns>
+        ///<exception cref = "ArgumentNullException"></exception>
+        public static bool operator ==(OscInt32 i1,
+                                       OscInt32 i2)
+        {
+            if (ReferenceEquals(i1, null))
+                throw new ArgumentNullException("i1");
+
+            if (ReferenceEquals(i2, null))
+                throw new ArgumentNullException("i2");
+
+            return i1.Equals(i2);
+        }
+
+        ///<summary>
+        ///  Compares the value of two OscInt32 and determines if they are not equal
+        ///</summary>
+        ///<param name = "i1">integer one</param>
+        ///<param name = "i2">integer two</param>
+        ///<returns></returns>
+        ///<exception cref = "ArgumentNullException"></exception>
+        public static bool operator !=(OscInt32 i1,
+                                       OscInt32 i2)
+        {
+            if (ReferenceEquals(i1, null))
+                throw new ArgumentNullException("i1");
+
+            if (ReferenceEquals(i2, null))
+                throw new ArgumentNullException("i2");
+
+            return !i1.Equals(i2);
+        }
+
         #region Implementation of IOscElement
 
         /// <summary>

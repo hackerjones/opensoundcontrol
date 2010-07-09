@@ -12,6 +12,8 @@ namespace OpenSoundControl
     /// </summary>
     public class OscFalse : IOscElement
     {
+        private const string Value = "False";
+
         /// <summary>
         ///   Returns a <see cref = "T:System.String" /> that represents the current <see cref = "T:System.Object" />.
         /// </summary>
@@ -21,7 +23,36 @@ namespace OpenSoundControl
         /// <filterpriority>2</filterpriority>
         public override string ToString()
         {
-            return "False";
+            return Value;
+        }
+
+        /// <summary>
+        ///   Determines whether the specified <see cref = "T:System.Object" /> is equal to the current <see cref = "T:System.Object" />.
+        /// </summary>
+        /// <returns>
+        ///   true if the specified <see cref = "T:System.Object" /> is equal to the current <see cref = "T:System.Object" />; otherwise, false.
+        /// </returns>
+        /// <param name = "obj">The <see cref = "T:System.Object" /> to compare with the current <see cref = "T:System.Object" />. </param>
+        /// <filterpriority>2</filterpriority>
+        public override bool Equals(object obj)
+        {
+            if (obj != null && obj is OscFalse)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        ///   Serves as a hash function for a particular type.
+        /// </summary>
+        /// <returns>
+        ///   A hash code for the current <see cref = "T:System.Object" />.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
         }
 
         #region Implementation of IOscElement

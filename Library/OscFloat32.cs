@@ -67,12 +67,12 @@ namespace OpenSoundControl
         /// <filterpriority>2</filterpriority>
         public override bool Equals(object obj)
         {
-            if (obj == null || GetType() != obj.GetType())
+            if (obj != null && obj is OscFloat32)
             {
-                return false;
+                OscFloat32 other = obj as OscFloat32;
+                return Value == other.Value;
             }
-            OscFloat32 other = (OscFloat32)obj;
-            return (this == other);
+            return false;
         }
 
         ///<summary>
@@ -84,7 +84,13 @@ namespace OpenSoundControl
         public static bool operator ==(OscFloat32 f1,
                                        OscFloat32 f2)
         {
-            return (f1.Value == f2.Value);
+            if (ReferenceEquals(f1, null))
+                throw new ArgumentNullException("f1");
+
+            if (ReferenceEquals(f2, null))
+                throw new ArgumentNullException("f2");
+
+            return f1.Equals(f2);
         }
 
         ///<summary>
@@ -96,7 +102,13 @@ namespace OpenSoundControl
         public static bool operator !=(OscFloat32 f1,
                                        OscFloat32 f2)
         {
-            return !(f1 == f2);
+            if (ReferenceEquals(f1, null))
+                throw new ArgumentNullException("f1");
+
+            if (ReferenceEquals(f2, null))
+                throw new ArgumentNullException("f2");
+
+            return !f1.Equals(f2);
         }
 
         #region Implementation of IOscElement
