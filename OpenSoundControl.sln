@@ -3,6 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{A310CFF5-CE0B-4B9A-81A6-AA7E7419B110}"
 	ProjectSection(SolutionItems) = preProject
+		DoxygenOutput\html\index.html = DoxygenOutput\html\index.html
 		license.docx = license.docx
 		release.txt = release.txt
 	EndProjectSection
@@ -20,6 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Local.testsettings = Local.testsettings
 		OpenSoundControl.vsmdi = OpenSoundControl.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doxygen HTML Output", "Doxygen HTML Output", "{FB399B3C-BE32-4115-8476-A040C77ED9E3}"
+	ProjectSection(SolutionItems) = preProject
+		DoxygenOutput\html\index.html = DoxygenOutput\html\index.html
 	EndProjectSection
 EndProject
 Global
@@ -70,6 +76,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{FB399B3C-BE32-4115-8476-A040C77ED9E3} = {A310CFF5-CE0B-4B9A-81A6-AA7E7419B110}
 		{2606577A-D943-453D-898C-A0C8F62853D9} = {1C78CC26-1E0B-437E-9CB6-B7A9C1EB8761}
 		{74B39441-660D-4F77-B7B7-690D171B0252} = {1C78CC26-1E0B-437E-9CB6-B7A9C1EB8761}
 		{1ECF60FE-ECB8-4C42-8D29-7B954B66EEC6} = {1C78CC26-1E0B-437E-9CB6-B7A9C1EB8761}
