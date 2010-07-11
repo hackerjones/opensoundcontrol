@@ -14,5 +14,5 @@ You can submit bug reports directly to the author at markalanj@gmail.com
 or use the github project page issue tracker at 
 http://github.com/markalanj/OpenSoundControl/issues.
 
-This Open Sound Control Library project uses the Microsoft 
-[major].[minor].[build].[revision] format for version information.
+This project uses the Microsoft [major].[minor].[build].[revision] 
+format for version information.
