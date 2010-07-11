@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="OscStringTest.cs" />
     <Compile Include="OscTypeTagStringTest.cs" />
-    <Compile Include="OscUdpIoDeviceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

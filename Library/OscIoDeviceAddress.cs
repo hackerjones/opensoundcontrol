@@ -20,17 +20,16 @@ namespace OpenSoundControl
         ///   Creates a device address for IP address types
         /// </summary>
         /// <param name = "type"></param>
-        /// <param name = "localEP"></param>
+        /// <param name = "ipEndPoint"></param>
         /// <exception cref = "ArgumentException"></exception>
         public OscIoDeviceAddress(OscIoDeviceAddressType type,
-                                  IPEndPoint localEP)
+                                  IPEndPoint ipEndPoint)
         {
             if (type != OscIoDeviceAddressType.Udp)
-            {
                 throw new ArgumentException("Invalid address type for IPEndPoint");
-            }
+
             _type = type;
-            _ipEndPoint = localEP;
+            _ipEndPoint = ipEndPoint;
         }
 
         /// <summary>
@@ -46,7 +45,13 @@ namespace OpenSoundControl
         /// </summary>
         public IPEndPoint IPEndPoint
         {
-            get { return _ipEndPoint; }
+            get
+            {
+                if (_type != OscIoDeviceAddressType.Udp)
+                    throw new InvalidOperationException("Address is not an IP type");
+
+                return _ipEndPoint;
+            }
         }
     }
 }

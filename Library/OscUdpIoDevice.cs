@@ -14,24 +14,18 @@ namespace OpenSoundControl
     /// </summary>
     public class OscUdpIoDevice : IDisposable, IOscIoDevice
     {
+        private readonly IPEndPoint _remoteEndPoint;
         private readonly UdpClient _udp;
         private bool _disposed;
 
         /// <summary>
-        ///   Creates a UDP I/O device using the given local port number.
+        ///   Creates a UDP I/O device.
         /// </summary>
-        public OscUdpIoDevice(int localPort)
+        public OscUdpIoDevice(IPEndPoint localEndPoint,
+                              IPEndPoint remoteEndPoint)
         {
-            _udp = new UdpClient(localPort) {EnableBroadcast = true};
-            BeginReceive();
-        }
-
-        /// <summary>
-        ///   Creates a UDP I/O device using the given local end point
-        /// </summary>
-        public OscUdpIoDevice(IPEndPoint localEP)
-        {
-            _udp = new UdpClient(localEP);
+            _udp = new UdpClient(localEndPoint) {EnableBroadcast = true};
+            _remoteEndPoint = remoteEndPoint;
             BeginReceive();
         }
 
@@ -70,45 +64,31 @@ namespace OpenSoundControl
         /// <summary>
         ///   Sends an OSC message to the given UDP address.
         /// </summary>
-        public void Send(
-            OscMessage message,
-            OscIoDeviceAddress deviceAddress
-            )
+        public void Send(OscMessage message)
         {
             if (ReferenceEquals(message, null))
                 throw new ArgumentNullException("message");
 
-            if (ReferenceEquals(message, null))
-                throw new ArgumentNullException("deviceAddress");
-
-            if (deviceAddress.Type != OscIoDeviceAddressType.Udp)
-                throw new ArgumentException("Device address is not UDP");
-
             byte[] packet = message.ToOscPacketArray();
-            var eventArgs = new OscIoDeviceEventArgs(message, deviceAddress);
-            _udp.BeginSend(packet, packet.Length, deviceAddress.IPEndPoint, OnSend, eventArgs);
+            OscIoDeviceEventArgs eventArgs = new OscIoDeviceEventArgs(message,
+                                                                      new OscIoDeviceAddress(
+                                                                          OscIoDeviceAddressType.Udp, _remoteEndPoint));
+            _udp.BeginSend(packet, packet.Length, _remoteEndPoint, OnSend, eventArgs);
         }
 
         /// <summary>
         ///   Sends a OSC bundle to the given UDP address.
         /// </summary>
-        public void Send(
-            OscBundle bundle,
-            OscIoDeviceAddress deviceAddress
-            )
+        public void Send(OscBundle bundle)
         {
             if (bundle == null)
                 throw new ArgumentNullException("bundle");
 
-            if (deviceAddress == null)
-                throw new ArgumentNullException("deviceAddress");
-
-            if (deviceAddress.Type != OscIoDeviceAddressType.Udp)
-                throw new ArgumentException("Device address is not UDP");
-
             byte[] packet = bundle.ToOscPacketArray();
-            var eventArgs = new OscIoDeviceEventArgs(bundle, deviceAddress);
-            _udp.BeginSend(packet, packet.Length, deviceAddress.IPEndPoint, OnSend, eventArgs);
+            OscIoDeviceEventArgs eventArgs = new OscIoDeviceEventArgs(bundle,
+                                                                      new OscIoDeviceAddress(
+                                                                          OscIoDeviceAddressType.Udp, _remoteEndPoint));
+            _udp.BeginSend(packet, packet.Length, _remoteEndPoint, OnSend, eventArgs);
         }
 
         #endregion
@@ -158,8 +138,8 @@ namespace OpenSoundControl
                 // get the datagram
                 var remoteEP = new IPEndPoint(IPAddress.Any, 0);
                 byte[] datagram = _udp.EndReceive(ar, ref remoteEP);
-//                Console.WriteLine("OnReceive");
-//                Console.WriteLine(Encoding.ASCII.GetString(datagram));
+                //                Console.WriteLine("OnReceive");
+                //                Console.WriteLine(Encoding.ASCII.GetString(datagram));
 
                 // create an device address for the remote end point
                 var deviceAddress = new OscIoDeviceAddress(OscIoDeviceAddressType.Udp, remoteEP);

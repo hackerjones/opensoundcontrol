@@ -8,6 +8,9 @@ using System.Net;
 
 namespace OpenSoundControl
 {
+    /// <summary>
+    ///   Utility methods
+    /// </summary>
     internal static class Osc
     {
         /// <summary>

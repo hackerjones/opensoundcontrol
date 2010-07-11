@@ -10,7 +10,7 @@ namespace OpenSoundControl
     /// <summary>
     ///   I/O device interface
     /// </summary>
-    public interface IOscIoDevice
+    public interface IOscIoDevice : IDisposable
     {
         /// <summary>
         ///   Raised when a send operation completes.
@@ -31,16 +31,12 @@ namespace OpenSoundControl
         ///   Sends an OSC message to the given device address.
         /// </summary>
         /// <param name = "message">OSC message to send.</param>
-        /// <param name = "deviceAddress">Device address to send to.</param>
-        void Send(OscMessage message,
-                  OscIoDeviceAddress deviceAddress);
+        void Send(OscMessage message);
 
         /// <summary>
         ///   Sends a OSC bundle to the given device address.
         /// </summary>
         /// <param name = "bundle">OSC bundle to send.</param>
-        /// <param name = "deviceAddress">Device address to send to.</param>
-        void Send(OscBundle bundle,
-                  OscIoDeviceAddress deviceAddress);
+        void Send(OscBundle bundle);
     }
 }
