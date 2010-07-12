@@ -1,0 +1,10 @@
+*----------------------------*
+* Open Sound Control Library *
+* Change Log                 *
+*----------------------------*
+
+2010-08-11 Mark Jones <markalanj@gmail.com>
+
+* Added the I/O device channel concept
+
+
