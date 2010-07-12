@@ -122,7 +122,7 @@ namespace OpenSoundControl
         /// </summary>
         public byte[] ToOscPacketArray()
         {
-            return Osc.PadArray(Encoding.ASCII.GetBytes(Value));
+            return Osc.PadArray(Encoding.ASCII.GetBytes(Value + '\0'));
         }
 
         #endregion

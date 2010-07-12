@@ -15,28 +15,32 @@ namespace OpenSoundControl
         /// <summary>
         ///   Raised when a send operation completes.
         /// </summary>
-        event EventHandler<OscIoDeviceEventArgs> SendCompleted;
+        event EventHandler<OscIoDeviceEventArgs> DataSent;
 
         /// <summary>
         ///   Raised when a packet is received.
         /// </summary>
-        event EventHandler<OscIoDeviceEventArgs> ReceiveCompleted;
+        event EventHandler<OscIoDeviceEventArgs> DataReceived;
 
         /// <summary>
         ///   Raised when an I/O error occurs.
         /// </summary>
-        event EventHandler<OscIoDeviceEventArgs> Error;
+        event EventHandler<OscIoDeviceEventArgs> IoError;
 
         /// <summary>
         ///   Sends an OSC message to the given device address.
         /// </summary>
         /// <param name = "message">OSC message to send.</param>
-        void Send(OscMessage message);
+        /// <param name = "deviceChannel"></param>
+        void Send(OscMessage message,
+                  OscIoDeviceChannel deviceChannel = null);
 
         /// <summary>
         ///   Sends a OSC bundle to the given device address.
         /// </summary>
         /// <param name = "bundle">OSC bundle to send.</param>
-        void Send(OscBundle bundle);
+        /// <param name = "deviceChannel"></param>
+        void Send(OscBundle bundle,
+                  OscIoDeviceChannel deviceChannel = null);
     }
 }

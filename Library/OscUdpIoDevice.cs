@@ -12,24 +12,34 @@ namespace OpenSoundControl
     /// <summary>
     ///   Contains methods for sending and receiving OSC packets over UDP.
     /// </summary>
-    public class OscUdpIoDevice : IDisposable, IOscIoDevice
+    public class OscUdpIoDevice : IOscIoDevice
     {
-        private readonly IPEndPoint _remoteEndPoint;
+        private readonly IPEndPoint _defaultRemoteEndPoint;
         private readonly UdpClient _udp;
         private bool _disposed;
 
-        /// <summary>
-        ///   Creates a UDP I/O device.
-        /// </summary>
+
+        ///<summary>
+        ///  Creates a UDP OSC I/O device.
+        ///</summary>
+        ///<param name = "localEndPoint">Local end point to bind the UDP socket</param>
+        ///<param name = "defaultRemoteEndPoint">Default end point to send to if Send does not specify a device channel</param>
+        ///<exception cref = "ArgumentNullException"></exception>
         public OscUdpIoDevice(IPEndPoint localEndPoint,
-                              IPEndPoint remoteEndPoint)
+                              IPEndPoint defaultRemoteEndPoint)
         {
+            if (localEndPoint == null)
+                throw new ArgumentNullException("localEndPoint");
+
+            if (defaultRemoteEndPoint == null)
+                throw new ArgumentNullException("defaultRemoteEndPoint");
+
             _udp = new UdpClient(localEndPoint) {EnableBroadcast = true};
-            _remoteEndPoint = remoteEndPoint;
+            _defaultRemoteEndPoint = defaultRemoteEndPoint;
             BeginReceive();
         }
 
-        #region IDisposable Members
+        #region IOscIoDevice Members
 
         /// <summary>
         ///   Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -41,54 +51,58 @@ namespace OpenSoundControl
             GC.SuppressFinalize(this);
         }
 
-        #endregion
-
-        #region IOscIoDevice Members
-
         /// <summary>
         ///   Raised when a send operation completes.
         /// </summary>
-        public event EventHandler<OscIoDeviceEventArgs> SendCompleted;
+        public event EventHandler<OscIoDeviceEventArgs> DataSent;
 
         /// <summary>
         ///   Raised when a packet is received.
         /// </summary>
-        public event EventHandler<OscIoDeviceEventArgs> ReceiveCompleted;
+        public event EventHandler<OscIoDeviceEventArgs> DataReceived;
 
 
         /// <summary>
         ///   Raised when an I/O error occurs.
         /// </summary>
-        public event EventHandler<OscIoDeviceEventArgs> Error;
+        public event EventHandler<OscIoDeviceEventArgs> IoError;
 
         /// <summary>
         ///   Sends an OSC message to the given UDP address.
         /// </summary>
-        public void Send(OscMessage message)
+        public void Send(OscMessage message,
+                         OscIoDeviceChannel deviceChannel)
         {
             if (ReferenceEquals(message, null))
                 throw new ArgumentNullException("message");
 
             byte[] packet = message.ToOscPacketArray();
+            IPEndPoint ipEndPoint = deviceChannel != null ? deviceChannel.IPEndPoint : _defaultRemoteEndPoint;
             OscIoDeviceEventArgs eventArgs = new OscIoDeviceEventArgs(message,
-                                                                      new OscIoDeviceAddress(
-                                                                          OscIoDeviceAddressType.Udp, _remoteEndPoint));
-            _udp.BeginSend(packet, packet.Length, _remoteEndPoint, OnSend, eventArgs);
+                                                                      new OscIoDeviceChannel(
+                                                                          OscIoDeviceChannelType.Udp,
+                                                                          ipEndPoint));
+            // send message
+            _udp.BeginSend(packet, packet.Length, ipEndPoint, OnSend, eventArgs);
         }
 
         /// <summary>
         ///   Sends a OSC bundle to the given UDP address.
         /// </summary>
-        public void Send(OscBundle bundle)
+        public void Send(OscBundle bundle,
+                         OscIoDeviceChannel deviceChannel)
         {
-            if (bundle == null)
+            if (ReferenceEquals(bundle, null))
                 throw new ArgumentNullException("bundle");
 
             byte[] packet = bundle.ToOscPacketArray();
+            IPEndPoint ipEndPoint = deviceChannel != null ? deviceChannel.IPEndPoint : _defaultRemoteEndPoint;
             OscIoDeviceEventArgs eventArgs = new OscIoDeviceEventArgs(bundle,
-                                                                      new OscIoDeviceAddress(
-                                                                          OscIoDeviceAddressType.Udp, _remoteEndPoint));
-            _udp.BeginSend(packet, packet.Length, _remoteEndPoint, OnSend, eventArgs);
+                                                                      new OscIoDeviceChannel(
+                                                                          OscIoDeviceChannelType.Udp,
+                                                                          ipEndPoint));
+            //send bundle
+            _udp.BeginSend(packet, packet.Length, ipEndPoint, OnSend, eventArgs);
         }
 
         #endregion
@@ -109,9 +123,9 @@ namespace OpenSoundControl
                 _udp.EndSend(ar);
 
                 // raise send event
-                if (SendCompleted != null)
+                if (DataSent != null)
                 {
-                    SendCompleted(this, eventArgs);
+                    DataSent(this, eventArgs);
                 }
             }
             catch (Exception e)
@@ -119,9 +133,9 @@ namespace OpenSoundControl
                 eventArgs.Exception = e;
 
                 // raise I/O error
-                if (Error != null)
+                if (IoError != null)
                 {
-                    Error(this, eventArgs);
+                    IoError(this, eventArgs);
                 }
             }
         }
@@ -136,13 +150,13 @@ namespace OpenSoundControl
             try
             {
                 // get the datagram
-                var remoteEP = new IPEndPoint(IPAddress.Any, 0);
-                byte[] datagram = _udp.EndReceive(ar, ref remoteEP);
+                IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                byte[] datagram = _udp.EndReceive(ar, ref remoteEndPoint);
                 //                Console.WriteLine("OnReceive");
                 //                Console.WriteLine(Encoding.ASCII.GetString(datagram));
 
                 // create an device address for the remote end point
-                var deviceAddress = new OscIoDeviceAddress(OscIoDeviceAddressType.Udp, remoteEP);
+                OscIoDeviceChannel deviceAddress = new OscIoDeviceChannel(OscIoDeviceChannelType.Udp, remoteEndPoint);
 
                 IOscElement element = OscParser.Parse(datagram);
                 OscIoDeviceEventArgs eventArgs = null;
@@ -157,9 +171,9 @@ namespace OpenSoundControl
                 }
 
                 // raise receive event
-                if (ReceiveCompleted != null)
+                if (DataReceived != null)
                 {
-                    ReceiveCompleted(this, eventArgs);
+                    DataReceived(this, eventArgs);
                 }
             }
             finally

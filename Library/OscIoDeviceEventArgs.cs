@@ -16,11 +16,11 @@ namespace OpenSoundControl
         ///   Creates a I/O event argument object which contains an OSC bundle.
         /// </summary>
         public OscIoDeviceEventArgs(OscBundle bundle,
-                                    OscIoDeviceAddress deviceAddress,
+                                    OscIoDeviceChannel deviceChannel,
                                     Exception exception = null)
         {
             Bundle = bundle;
-            DeviceAddress = deviceAddress;
+            DeviceChannel = deviceChannel;
             Exception = exception;
         }
 
@@ -28,11 +28,11 @@ namespace OpenSoundControl
         ///   Creates a I/O event argument object which contains an OSC message.
         /// </summary>
         public OscIoDeviceEventArgs(OscMessage message,
-                                    OscIoDeviceAddress deviceAddress,
+                                    OscIoDeviceChannel deviceChannel,
                                     Exception exception = null)
         {
             Message = message;
-            DeviceAddress = deviceAddress;
+            DeviceChannel = deviceChannel;
             Exception = exception;
         }
 
@@ -42,9 +42,9 @@ namespace OpenSoundControl
         public Exception Exception { get; set; }
 
         /// <summary>
-        ///   Gets the device address.
+        ///   Gets the device channel.
         /// </summary>
-        public OscIoDeviceAddress DeviceAddress { get; set; }
+        public OscIoDeviceChannel DeviceChannel { get; set; }
 
         /// <summary>
         ///   Gets the contained message.

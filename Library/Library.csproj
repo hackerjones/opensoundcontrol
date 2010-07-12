@@ -55,10 +55,10 @@
     <Compile Include="OscFloat32.cs" />
     <Compile Include="OscImpulse.cs" />
     <Compile Include="OscInt32.cs" />
-    <Compile Include="OscIoDeviceAddressType.cs" />
+    <Compile Include="OscIoDeviceChannelType.cs" />
     <Compile Include="OscMessage.cs" />
     <Compile Include="OscNull.cs" />
-    <Compile Include="OscIoDeviceAddress.cs" />
+    <Compile Include="OscIoDeviceChannel.cs" />
     <Compile Include="OscIoDeviceEventArgs.cs" />
     <Compile Include="OscParser.cs" />
     <Compile Include="OscString.cs" />

@@ -8,12 +8,12 @@ using System;
 namespace OpenSoundControl
 {
     /// <summary>
-    ///   I/O device address enumeration.
+    ///   I/O device channel enumeration.
     /// </summary>
-    public enum OscIoDeviceAddressType
+    public enum OscIoDeviceChannelType
     {
         /// <summary>
-        ///   UDP address
+        ///   UDP channel
         /// </summary>
         Udp
     }

@@ -9,46 +9,56 @@ using System.Net;
 namespace OpenSoundControl
 {
     /// <summary>
-    ///   Encapsulates an I/O device address.
+    ///   Encapsulates an I/O channel.
     /// </summary>
-    public class OscIoDeviceAddress
+    public class OscIoDeviceChannel
     {
         private readonly IPEndPoint _ipEndPoint;
-        private readonly OscIoDeviceAddressType _type;
+        private readonly OscIoDeviceChannelType _type;
 
         /// <summary>
-        ///   Creates a device address for IP address types
+        ///   Creates a device channel for IP address types
         /// </summary>
         /// <param name = "type"></param>
         /// <param name = "ipEndPoint"></param>
         /// <exception cref = "ArgumentException"></exception>
-        public OscIoDeviceAddress(OscIoDeviceAddressType type,
+        public OscIoDeviceChannel(OscIoDeviceChannelType type,
                                   IPEndPoint ipEndPoint)
         {
-            if (type != OscIoDeviceAddressType.Udp)
-                throw new ArgumentException("Invalid address type for IPEndPoint");
+            switch (type)
+            {
+                case OscIoDeviceChannelType.Udp:
+                    break;
+                default:
+                    throw new ArgumentException("Channel is not an IP type");
+            }
 
             _type = type;
             _ipEndPoint = ipEndPoint;
         }
 
         /// <summary>
-        ///   Gets the device address type.
+        ///   Gets the device channel type.
         /// </summary>
-        public OscIoDeviceAddressType Type
+        public OscIoDeviceChannelType Type
         {
             get { return _type; }
         }
 
         /// <summary>
-        ///   Gets the device address as an IPEndPoint.
+        ///   Gets the device channel as an IPEndPoint.
         /// </summary>
         public IPEndPoint IPEndPoint
         {
             get
             {
-                if (_type != OscIoDeviceAddressType.Udp)
-                    throw new InvalidOperationException("Address is not an IP type");
+                switch (_type)
+                {
+                    case OscIoDeviceChannelType.Udp:
+                        break;
+                    default:
+                        throw new InvalidOperationException("Channel is not an IP type");
+                }
 
                 return _ipEndPoint;
             }

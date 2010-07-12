@@ -16,3 +16,10 @@ http://github.com/markalanj/OpenSoundControl/issues.
 
 This project uses the Microsoft [major].[minor].[build].[revision] 
 format for version information.
+
+*-------------------*
+* Development Tools *
+*-------------------*
+
+Visual Studio 2010
+.NET 4
